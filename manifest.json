@@ -1,0 +1,12 @@
+{
+    "name":"RegCmu Peek",
+    "description":"https://www3.reg.cmu.ac.th/regist260/public/stdtotal.php?var=maxregist&COURSENO=261102&SECLEC=001&SECLAB=000",
+    "version":"1",
+    "manifest_version":2,
+    "content_scripts": [
+        {
+        "matches": ["https://www3.reg.cmu.ac.th/regist*/public/stdtotal.php*"],
+        "js": ["thirdParty/jquery-3.2.1.min.js", "reg-cmu-peek.js"]
+        }
+    ]
+}
