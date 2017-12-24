@@ -40,7 +40,7 @@ if (document.title.indexOf("Students enrollment in course") != -1) {
         // console.log([year, faculty, program, id]);
         var picUrl = 'http://archive3.lib.cmu.ac.th/innopac/patrons/';
         picUrl += year + '/';
-        if (year != '58') {
+        if (year != '59') {
             picUrl += program + '/';
         }
         picUrl += faculty + '/' + id + '.jpg';
