@@ -1,6 +1,6 @@
 {
     "name":"RegCmu Peek",
-    "description":"https://www3.reg.cmu.ac.th/regist260/public/stdtotal.php?var=maxregist&COURSENO=261102&SECLEC=001&SECLAB=000",
+    "description":"Google Chrome Extension for peek at each student's picture in reg.cmu.ac.th",
     "version":"1",
     "manifest_version":2,
     "content_scripts": [
