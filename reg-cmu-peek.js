@@ -11,7 +11,7 @@ if (document.title.indexOf("Students enrollment in course") != -1) {
 
     // $("tbody").prepend("<tr><td>...contents...</td></tr>");
     // $('.msan').html('Whatever <b>HTML</b> you want here.');
-    $('.msan').eq(3).html('RegCmu Peek');
+    $('.msan').eq(3).html('<b>RegCmu Peek</b>');
     var studentIdList = [];
     // $('html body center div table tbody tr').each(function() { studentIdList.push($(this).text()) });
     var tableObject = $("html body center div table tbody tr.msan")
@@ -28,7 +28,7 @@ if (document.title.indexOf("Students enrollment in course") != -1) {
         return index % 2 === 0;
     });
     // console.log(studentIdList);
-    console.log(filtered);
+    // console.log(filtered);
 
     var studentDataList = [];
     var studentPictureList = [];
@@ -49,7 +49,7 @@ if (document.title.indexOf("Students enrollment in course") != -1) {
 
         $( "tr.msan:contains(" + id + ") td:nth-child(4)" ).html("<img src=\"" + studentPictureList[i] + "\">");
     }
-    console.log(studentPictureList);
+    // console.log(studentPictureList);
 
     // $( "tr.msan td:nth-child(4)" ).append( "<img src=\"" + studentPictureList[0] + "\">" );
     // $( "tr.msan td:nth-child(4)" ).append( "<span>pic here!</span>" );
