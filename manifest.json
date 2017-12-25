@@ -1,12 +1,17 @@
 {
-    "name":"RegCmu Peek",
-    "description":"Google Chrome Extension for peek at each student's picture in reg.cmu.ac.th",
-    "version":"1",
-    "manifest_version":2,
+    "name": "RegCMU Cumulative GPA Calculator",
+    "description": "Google Chrome Extension for predict and calculate your cumulative GPA (CGPA) in the transcript page of Reg CMU",
+    "version": "1",
+    "manifest_version": 2,
     "content_scripts": [
         {
-        "matches": ["https://www3.reg.cmu.ac.th/regist*/public/stdtotal.php*"],
-        "js": ["thirdParty/jquery-3.2.1.min.js", "reg-cmu-peek.js"]
+            "matches": [
+                "https://www3.reg.cmu.ac.th/transcript/result.php?time=*"
+            ],
+            "js": [
+                "thirdParty/jquery-3.2.1.min.js",
+                "cgpa-calculator.js"
+            ]
         }
     ]
 }
