@@ -49,32 +49,38 @@ if (document.title.indexOf(pageTitle) != -1) {
     // $('html body center > table').html("First Table [1/1]");
     var overallGPA = 0.0;
     var overallCredits = 0.0;
+    var overallGradePoints = 0.0;
     for (let term_year = 1; term_year < numTableFound; term_year+=2) {
         var credits = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(4)').map(function() {
             return $(this).text();
         }).get();
-        var grades = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(5)').map(function() {
+        var letterGrades = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(5)').map(function() {
             return $(this).text();
         }).get();
-        // console.log(grades);
-        var sumCreditsOfThisTerm = 0.0;
-        var gpaOfThisTerm = 0.0;
-        for (let index = 0; index < grades.length; index++) {
+        // console.log(letterGrades);
+        var sumCredits = 0.0;
+        var sumGradePoints = 0.0;
+        for (let index = 0; index < letterGrades.length; index++) {
             const credit = credits[index];
-            const grade = ConvertGradeToNumber(grades[index]);
+            const grade = ConvertGradeToNumber(letterGrades[index]);
             if (grade != -1) {
-                sumCreditsOfThisTerm += Number.parseInt(credit);
-                gpaOfThisTerm += (credit * grade);
+                sumCredits += Number.parseInt(credit);
+                sumGradePoints += (credit * grade);
             }
             // console.log(credit + " x " + grade);
         }
-        overallCredits += sumCreditsOfThisTerm;
-        gpaOfThisTerm /= sumCreditsOfThisTerm;
-        gpaOfThisTerm = gpaOfThisTerm.toFixed(2);
-        console.log("GPA of this term [" + term_year + "] = " + gpaOfThisTerm);
-        console.log("sumCredits = " + sumCreditsOfThisTerm);
+        // console.log("sumGradePoints = " + sumGradePoints);
+        overallGradePoints += sumGradePoints; // for CGPA
+        overallCredits += sumCredits; // for CGPA
+        var gpa = sumGradePoints / sumCredits;
+        gpa = gpa.toFixed(2);
+        console.log("GPA of this term [" + term_year + "] = " + gpa + " = " + sumGradePoints + "/" + sumCreditsOfThisTerm);
     }
+    console.log("overallGradePoints = " + overallGradePoints);
     console.log("overallCredits = " + overallCredits);
+
+
+
     // grades.forEach(element => {
     //     console.log("grade: " + element + "\n");
     // });
