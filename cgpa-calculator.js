@@ -87,6 +87,7 @@ if (document.title.indexOf(pageTitle) != -1) {
     // $('html body center > hr').last().after('<div id="foo">FOO!</div>');
 
     
+    
     // $( "p" ).insertAfter( "#foo" );
 
 
