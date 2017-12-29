@@ -1,85 +1,3 @@
-<script>
-    var idxMyCourse = 2
-
-    function createCourseNoInput() {
-        var inputCourseNo = document.createElement("INPUT");
-        inputCourseNo.type = "text";
-        inputCourseNo.name = "CourseNo";
-        inputCourseNo.value = "xxxxxx";
-        inputCourseNo.setAttribute('maxlength',6);
-        inputCourseNo.setAttribute('size',6);
-        return inputCourseNo;
-    }
-
-    function createCourseCreditInput() {
-        var inputCourseCredit = document.createElement("INPUT");
-        inputCourseCredit.type = "text";
-        inputCourseCredit.name = "CourseCredit";
-        inputCourseCredit.value = "0";
-        inputCourseCredit.setAttribute('maxlength',1);
-        inputCourseCredit.setAttribute('size',1);
-        return inputCourseCredit;
-    }
-
-    function createSelectLetterGradeDropDown() {
-        var array = ["-","A","B+","B","C+","C","D+","D","F","S"];
-        var selectList = document.createElement("select");
-        selectList.id = "mySelect";
-        for (var i = 0; i < array.length; i++) {
-            var option = document.createElement("option");
-            option.value = array[i];
-            option.text = array[i];
-            selectList.appendChild(option);
-        }
-        return selectList;
-    }
-
-    function myCreateFunction() {
-        var table = document.getElementById("table-main");
-        var row = table.insertRow(-1);
-        row.setAttribute('id', 'myCourseTR-'+idxMyCourse);
-        row.style.backgroundColor = "#EBF1F6";
-        var td1 = row.insertCell(-1);
-        // var cell2 = row.insertCell(-1);
-        var td2  = document.createElement('td');
-        td2.setAttribute('align', 'center');
-        row.appendChild(td2);
-        var td3 = row.insertCell(-1);
-        var td4 = row.insertCell(-1);
-        var td5 = row.insertCell(-1);
-        td1.style.textAlign = "center";
-        td1.innerHTML = idxMyCourse;
-        var inputCourseNo = createCourseNoInput();
-        td2.appendChild(inputCourseNo);
-        // td2.innerHTML = "CELL2";
-        td3.innerHTML = "COURSE NAME";
-        td4.appendChild(createCourseCreditInput());
-        // td4.innerHTML = "CREDIT";
-        var btnRemove = document.createElement("INPUT");
-        btnRemove.type = "button";
-        btnRemove.value = "Remove";
-        btnRemove.setAttribute("onclick", "Remove(this);");
-        td1.appendChild(btnRemove);
-        td5.appendChild(createSelectLetterGradeDropDown());
-        // td5.innerHTML = "CELL5";
-        idxMyCourse++;
-    };
-
-    function Remove(button) {
-        //Determine the reference of the Row using the Button.
-        var row = button.parentNode.parentNode;
-        var name = row.getElementsByTagName("td")[0].innerHTML;
-        if (confirm("Do you want to delete: " + name)) {
-
-            //Get the reference of the Table.
-            var table = document.getElementById("table-main");
-
-            //Delete the Table row using it's Index.
-            table.deleteRow(row.rowIndex);
-        }
-    };
-</script>
-
 <br>
 <table id="cgpa-calculator-table" border="0" align="center" cellpadding="0" cellspacing="0" width="597" bgcolor="#0068D0">
     <tbody>
@@ -128,9 +46,9 @@
                             <td width="29" height="22" align="center">1</td>
                             <td width="84" height="22" align="center"><input type="text" name="CourseId" value="261405" style="text-align: center" maxlength="6" size="6"></td>
                             <td width="314" height="22" align="left">COURSE NAME</td>
-                            <td height="22" align="center"><input type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td>
+                            <td height="22" align="center"><input id="myCourseCredit-1" type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td>
                             <td width="78" height="22" align="center" class="msan">
-                                <select name="CourseLetterGrade">
+                                <select id="myCourseLetterGrade-1" name="CourseLetterGrade">
                                     <option value="-">-</option>
                                     <option value="A">A</option>
                                     <option value="B+">B+</option>
@@ -164,6 +82,6 @@
     </tbody>
 </table>
 <br>
-<INPUT id="AddNewCourse" type="button" value="Add" onclick="myCreateFunction()" class="btn_medium" /> 
+<INPUT id="AddNewCourse" type="button" value="Add" class="btn_medium" /> 
 <br>
 <hr width="520" size="1">

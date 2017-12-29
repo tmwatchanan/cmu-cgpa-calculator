@@ -1,5 +1,7 @@
 var pageTitle = "ผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่";
 
+var idxMyCourse = 2;
+
 function ConvertGradeToNumber(gradeChar) {
     switch (gradeChar) {
         case 'A':
@@ -31,6 +33,93 @@ function ConvertGradeToNumber(gradeChar) {
             break;
     }
 }
+
+function createCourseNoInput() {
+    var inputCourseNo = document.createElement("INPUT");
+    inputCourseNo.type = "text";
+    inputCourseNo.name = "CourseNo";
+    inputCourseNo.value = "xxxxxx";
+    inputCourseNo.setAttribute('maxlength',6);
+    inputCourseNo.setAttribute('size',6);
+    return inputCourseNo;
+}
+
+function createCourseCreditInput(idx) {
+    var inputCourseCredit = document.createElement("INPUT");
+    inputCourseCredit.setAttribute('id', 'myCourseCredit-'+idxMyCourse);
+    inputCourseCredit.type = "text";
+    inputCourseCredit.name = "CourseCredit";
+    inputCourseCredit.value = "0";
+    inputCourseCredit.setAttribute('maxlength',1);
+    inputCourseCredit.setAttribute('size',1);
+    return inputCourseCredit;
+}
+
+function createSelectLetterGradeDropDown(idx) {
+    var array = ["-","A","B+","B","C+","C","D+","D","F","S"];
+    var selectList = document.createElement("select");
+    selectList.id = "myCourseLetterGrade-"+idxMyCourse;
+    for (var i = 0; i < array.length; i++) {
+        var option = document.createElement("option");
+        option.value = array[i];
+        option.text = array[i];
+        selectList.appendChild(option);
+    }
+    return selectList;
+}
+
+function myCreateFunction() {
+    var table = document.getElementById("table-main");
+    var row = table.insertRow(-1);
+    row.setAttribute('id', 'myCourseTR-'+idxMyCourse);
+    row.style.backgroundColor = "#EBF1F6";
+    var td1 = row.insertCell(-1);
+    // var cell2 = row.insertCell(-1);
+    var td2  = document.createElement('td');
+    td2.setAttribute('align', 'center');
+    row.appendChild(td2);
+    var td3 = row.insertCell(-1);
+    var td4 = row.insertCell(-1);
+    var td5 = row.insertCell(-1);
+    td1.style.textAlign = "center";
+    td1.innerHTML = idxMyCourse;
+    var inputCourseNo = createCourseNoInput();
+    td2.appendChild(inputCourseNo);
+    // td2.innerHTML = "CELL2";
+    td3.innerHTML = "COURSE NAME";
+    td4.appendChild(createCourseCreditInput());
+    // td4.innerHTML = "CREDIT";
+    var btnRemove = document.createElement("INPUT");
+    btnRemove.type = "button";
+    btnRemove.value = "Remove";
+    btnRemove.setAttribute("onclick", "Remove(this);");
+    td1.appendChild(btnRemove);
+    td5.appendChild(createSelectLetterGradeDropDown());
+    // td5.innerHTML = "CELL5";
+
+    $("#myCourseCredit-"+idxMyCourse).on('change keydown paste input', function(){
+        console.log("-> " + $( this ).val() );
+    });
+    $("#myCourseLetterGrade-"+idxMyCourse).on('change keydown paste input', function(){
+        console.log("-> " + $( this ).val() );
+    });    
+
+    idxMyCourse++;
+};
+
+function Remove(button) {
+    //Determine the reference of the Row using the Button.
+    var row = button.parentNode.parentNode;
+    var name = row.getElementsByTagName("td")[0].innerHTML;
+    if (confirm("Do you want to delete: " + name)) {
+
+        //Get the reference of the Table.
+        var table = document.getElementById("table-main");
+
+        //Delete the Table row using it's Index.
+        table.deleteRow(row.rowIndex);
+    }
+};
 
 // Check page title
 if (document.title.indexOf(pageTitle) != -1) {
@@ -81,12 +170,36 @@ if (document.title.indexOf(pageTitle) != -1) {
 
 // SECTION: EXPECTED GRADES
 
-    $.get(chrome.extension.getURL('table-template.html'), function(data){
-        $('html body center > hr').last().after(data);
-    });
+    // $.get(chrome.extension.getURL('table-template.html'), function(data){
+    //     $('html body center > hr').last().after(data);
+    // });
+
+    $('html body center > hr').last().after('<br> <table id="cgpa-calculator-table" border="0" align="center" cellpadding="0" cellspacing="0" width="597" bgcolor="#0068D0"> <tbody> <tr id="table-caption"> <td bgcolor="#FFFFFF" width="597" align="center" class="msan"> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img src="images/grade-top-left.gif" width="14" height="29"> </td> <td width="723" height="20" align="center" background="images/grade-top-bg.gif" bgcolor="#FFFFFF" class="msan12">Expected Letter Grades in the Next Semester <!-- <b>1</b> ปีการศึกษา <b>2560</b> --> </td> <td width="14" height="20" align="right" valign="top"> <img src="images/grade-top-right.gif" width="14" height="29"> </td> </tr> </tbody> </table> </td> </tr> <tr> <td width="597" bgcolor="#FFFFFF"> <table id="table-main" border="0" cellspacing="1" cellpadding="2" width="100%" bgcolor="#A2BCD9"> <tbody> <tr bgcolor="#C6E2FF" class="msan" id="table-header"> <td width="29" height="26" align="center" bgcolor="#CFDEEB" class="taho7"> <b>NO</b> </td> <td width="84" align="center" bgcolor="#CFDEEB" class="taho7"> <b>COURSE NO</b> </td> <td width="314" align="center" bgcolor="#CFDEEB" class="taho7"> <b>TITLE</b> </td> <td width="66" align="center" bgcolor="#CFDEEB" class="taho7"> <b>CREDIT</b> </td> <td width="78" align="center" bgcolor="#CFDEEB" class="taho7"> <b>GRADE</b> </td> </tr> <tr id="myCourseTR-1" bgcolor="#EBF1F6" class="msan"> <td width="29" height="22" align="center">1</td> <td width="84" height="22" align="center"><input type="text" name="CourseId" value="261405" style="text-align: center" maxlength="6" size="6"></td> <td width="314" height="22" align="left">COURSE NAME</td> <td height="22" align="center"><input id="myCourseCredit-1" type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td> <td width="78" height="22" align="center" class="msan"> <select id="myCourseLetterGrade-1" name="CourseLetterGrade"> <option value="-">-</option> <option value="A">A</option> <option value="B+">B+</option> <option value="B">B</option> <option value="C+">C+</option> <option value="C">C</option> <option value="D+">D+</option> <option value="D">D</option> <option value="F">F</option> <option value="S">S</option> </select> </td> </tr> </tbody> </table> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img src="images/grade-bottom-left.gif" width="14" height="21"> </td> <td width="723" height="20" align="center" background="images/grade-bottom-bg.gif" bgcolor="#FFFFFF"></td> <td width="14" height="20" align="right" valign="top"> <img src="images/grade-bottom-right.gif" width="14" height="21"> </td> </tr> </tbody> </table> </td> </tr> </tbody> </table> <br> <INPUT id="AddNewCourse" type="button" value="Add" class="btn_medium" /> <br> <hr width="520" size="1">');
+
     // $('html body center > hr').last().after('<div id="foo">FOO!</div>');
 
-    
+    $('#AddNewCourse').click(myCreateFunction);
+
+    $("#myCourseCredit-1").on('change keydown paste input', function(){
+        console.log( $( this ).val() );
+    });
+
+    $("#myCourseLetterGrade-1").on('change keydown paste input', function(){
+        console.log( $( this ).val() );
+    });
+
+    // $("#myCourseCredit-1").on('change keydown paste input', function(){
+    //     console.log( $( this ).text() );
+    // });
+
+    // onload = function () {
+    //     var e = document.getElementById('myCourseCredit-1');
+    //     e.oninput = myHandler;
+    //     e.onpropertychange = e.oninput; // for IE8
+    //     // e.onchange = e.oninput; // FF needs this in <select><option>...
+    //     // other things for onload()
+    //     console.log(e.textContent());
+    //  };
     
     // $( "p" ).insertAfter( "#foo" );
 

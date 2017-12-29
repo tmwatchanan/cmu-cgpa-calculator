@@ -16,5 +16,9 @@
     ],
     "web_accessible_resources": [
         "table-template.html"
-    ]
+    ],
+    "background":
+    {
+        "scripts": ["thirdParty/jquery-3.2.1.min.js"]
+    }
 }
