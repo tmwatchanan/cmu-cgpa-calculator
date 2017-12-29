@@ -1,6 +1,28 @@
 <script>
+    var idxMyCourse = 2
+
+    function createCourseNoInput() {
+        var inputCourseNo = document.createElement("INPUT");
+        inputCourseNo.type = "text";
+        inputCourseNo.name = "CourseNo";
+        inputCourseNo.value = "xxxxxx";
+        inputCourseNo.setAttribute('maxlength',6);
+        inputCourseNo.setAttribute('size',6);
+        return inputCourseNo;
+    }
+
+    function createCourseCreditInput() {
+        var inputCourseCredit = document.createElement("INPUT");
+        inputCourseCredit.type = "text";
+        inputCourseCredit.name = "CourseCredit";
+        inputCourseCredit.value = "0";
+        inputCourseCredit.setAttribute('maxlength',1);
+        inputCourseCredit.setAttribute('size',1);
+        return inputCourseCredit;
+    }
+
     function createSelectLetterGradeDropDown() {
-        var array = ["A","B+","B","C+","C","D+","D","F","S"];
+        var array = ["-","A","B+","B","C+","C","D+","D","F","S"];
         var selectList = document.createElement("select");
         selectList.id = "mySelect";
         for (var i = 0; i < array.length; i++) {
@@ -10,18 +32,12 @@
             selectList.appendChild(option);
         }
         return selectList;
-        // var inputSelect = document.createElement("INPUT");
-        // inputSelect.type = "text";
-        // inputSelect.name = "CourseNo";
-        // inputSelect.value = "xxxxxx";
-        // inputSelect.setAttribute('maxlength',6);
-        // inputSelect.setAttribute('size',6);
-        // return inputSelect;
     }
 
     function myCreateFunction() {
         var table = document.getElementById("table-main");
         var row = table.insertRow(-1);
+        row.setAttribute('id', 'myCourseTR-'+idxMyCourse);
         row.style.backgroundColor = "#EBF1F6";
         var td1 = row.insertCell(-1);
         // var cell2 = row.insertCell(-1);
@@ -32,17 +48,13 @@
         var td4 = row.insertCell(-1);
         var td5 = row.insertCell(-1);
         td1.style.textAlign = "center";
-        td1.innerHTML = "2";
-        var inputCourseNo = document.createElement("INPUT");
-        inputCourseNo.type = "text";
-        inputCourseNo.name = "CourseNo";
-        inputCourseNo.value = "xxxxxx";
-        inputCourseNo.setAttribute('maxlength',6);
-        inputCourseNo.setAttribute('size',6);
+        td1.innerHTML = idxMyCourse;
+        var inputCourseNo = createCourseNoInput();
         td2.appendChild(inputCourseNo);
         // td2.innerHTML = "CELL2";
         td3.innerHTML = "COURSE NAME";
-        td4.innerHTML = "CREDIT";
+        td4.appendChild(createCourseCreditInput());
+        // td4.innerHTML = "CREDIT";
         var btnRemove = document.createElement("INPUT");
         btnRemove.type = "button";
         btnRemove.value = "Remove";
@@ -50,6 +62,7 @@
         td1.appendChild(btnRemove);
         td5.appendChild(createSelectLetterGradeDropDown());
         // td5.innerHTML = "CELL5";
+        idxMyCourse++;
     };
 
     function Remove(button) {
@@ -111,13 +124,14 @@
                                 <b>GRADE</b>
                             </td>
                         </tr>
-                        <tr bgcolor="#EBF1F6" class="msan" id="course-1">
+                        <tr id="myCourseTR-1" bgcolor="#EBF1F6" class="msan">
                             <td width="29" height="22" align="center">1</td>
                             <td width="84" height="22" align="center"><input type="text" name="CourseId" value="261405" style="text-align: center" maxlength="6" size="6"></td>
                             <td width="314" height="22" align="left">COURSE NAME</td>
-                            <td height="22" align="center"><input type="text" name="CourseCredit" value="3" style="text-align: center" maxlength="1" size="1"></td>
+                            <td height="22" align="center"><input type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td>
                             <td width="78" height="22" align="center" class="msan">
                                 <select name="CourseLetterGrade">
+                                    <option value="-">-</option>
                                     <option value="A">A</option>
                                     <option value="B+">B+</option>
                                     <option value="B">B</option>
