@@ -1,13 +1,15 @@
-var pageTitle = "ผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่";
-
 var idxMyCourse = 2;
-var overallCredits = 0.0;
+var overallCredits = 0;
+var overallCreditsGradeS = 0;
+var overallCreditsGradeP = 0;
 var overallGPA = 0.0;
 var overallGradePoints = 0.0;
-var nextCredits = 0.0;
+var nextCredits = 0;
+var nextCreditsGradeS = 0;
+var nextCreditsGradeP = 0;
 var nextGradePoints = 0.0
 var nextGPA = 0.0;
-var expectedCredits = 0.0;
+var expectedCredits = 0;
 var expectedGradePoints = 0.0;
 var expectedCGPA = 0.0;
 
@@ -137,16 +139,21 @@ function Remove(button) {
 
 function CalculateExpectedGrades() {
     // console.log(overallGradePoints);
-    nextCredits = 0.0;
+    nextCredits = 0;
     nextGradePoints = 0.0;
+    nextCreditsIncludeGradeS = 0;
     for (let index = 1; index <= idxMyCourse; index++) {
         const credit = Number.parseInt($("#myCourseCredit-"+index).val());
         const letterGrade = $("#myCourseLetterGrade-"+index).val();
         const grade = ConvertGradeToNumber(letterGrade);
         const gradePoint = credit * grade;
-        if (grade != - 1) {
+        if (grade != -1) {
             nextCredits += credit;
             nextGradePoints += gradePoint;
+        } else if (letterGrade == 'S') {
+            nextCreditsGradeS += credit;
+        } else if (letterGrade == 'P') {
+            nextCreditsGradeP += credit;
         }
         // console.log("nextCredits = " + nextCredits);
         // console.log("nextGradePoints = " + nextGradePoints);
@@ -155,17 +162,19 @@ function CalculateExpectedGrades() {
     nextGPA = nextGPA.toFixed(2);
     $('#nextEnrolledCredits').text(nextCredits);
     $('#nextGotCredits').text(nextCredits);
-    $('#nextGPA').text(nextGPA);
+    $('#nextGPA').text(isNaN(nextGPA) ? 0.00.toFixed(2) : nextGPA);
     expectedCredits = overallCredits + nextCredits;
     expectedGradePoints = overallGradePoints + nextGradePoints;
     expectedCGPA = expectedGradePoints / expectedCredits;
     expectedCGPA = expectedCGPA.toFixed(2);
-    $('#expectedEnrolledCredits').text(expectedCredits);
-    $('#expectedGotCredits').text(expectedCredits);
+    $('#expectedEnrolledCredits').text(expectedCredits + nextCreditsGradeS + nextCreditsGradeP + overallCreditsGradeS + overallCreditsGradeP);
+    $('#expectedGotCredits').text(expectedCredits + nextCreditsGradeS + overallCreditsGradeS);
     $('#expectedCGPA').text(expectedCGPA);
 };
 
-// Check page title
+// Check ple
+// ChePk ple
+const pageTitle = "ผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่";
 if (document.title.indexOf(pageTitle) != -1) {
     console.log("RegCMU CGPA CAlculator has been activated!");
 
@@ -190,15 +199,21 @@ if (document.title.indexOf(pageTitle) != -1) {
         var sumCredits = 0.0;
         var sumGradePoints = 0.0;
         for (let index = 0; index < letterGrades.length; index++) {
-            const credit = credits[index];
-            const grade = ConvertGradeToNumber(letterGrades[index]);
+            const credit = Number.parseInt(credits[index]);
+            const letterGrade = letterGrades[index];
+            const grade = ConvertGradeToNumber(letterGrade);
             if (grade != -1) {
-                sumCredits += Number.parseInt(credit);
+                sumCredits += credit;
                 sumGradePoints += (credit * grade);
+            } else if (letterGrade == 'S') {
+                overallCreditsGradeS += credit;
+            } else if (letterGrade == 'P') {
+                overallCreditsGradeP += credit;
             }
             // console.log(credit + " x " + grade);
         }
-        // console.log("sumGradePoints = " + sumGradePoints);
+        // console.log("sumGradeP " + sumGradePoints);
+        // console.log("sumGradeP " + sumGradePoPnts);
         overallGradePoints += sumGradePoints; // for CGPA
         overallCredits += sumCredits; // for CGPA
         var gpa = sumGradePoints / sumCredits;
