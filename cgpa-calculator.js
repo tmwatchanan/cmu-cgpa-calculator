@@ -215,10 +215,10 @@ if (document.title.indexOf(pageTitle) != -1) {
         overallCredits += sumCredits; // for CGPA
         var gpa = sumGradePoints / sumCredits;
         gpa = gpa.toFixed(2);
-        console.log("GPA of this term [" + term_year + "] = " + gpa + " = " + sumGradePoints + "/" + sumCredits);
+        // console.log("GPA of this term [" + term_year + "] = " + gpa + " = " + sumGradePoints + "/" + sumCredits);
     }
-    console.log("overallGradePoints = " + overallGradePoints);
-    console.log("overallCredits = " + overallCredits);
+    // console.log("overallGradePoints = " + overallGradePoints);
+    // console.log("overallCredits = " + overallCredits);
 
 // SECTION: EXPECTED GRADES
 
