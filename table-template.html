@@ -1,35 +1,55 @@
 <script>
+    function createSelectLetterGradeDropDown() {
+        var array = ["A","B+","B","C+","C","D+","D","F","S"];
+        var selectList = document.createElement("select");
+        selectList.id = "mySelect";
+        for (var i = 0; i < array.length; i++) {
+            var option = document.createElement("option");
+            option.value = array[i];
+            option.text = array[i];
+            selectList.appendChild(option);
+        }
+        return selectList;
+        // var inputSelect = document.createElement("INPUT");
+        // inputSelect.type = "text";
+        // inputSelect.name = "CourseNo";
+        // inputSelect.value = "xxxxxx";
+        // inputSelect.setAttribute('maxlength',6);
+        // inputSelect.setAttribute('size',6);
+        // return inputSelect;
+    }
+
     function myCreateFunction() {
         var table = document.getElementById("table-main");
         var row = table.insertRow(-1);
         row.style.backgroundColor = "#EBF1F6";
-        var cell1 = row.insertCell(-1);
+        var td1 = row.insertCell(-1);
         // var cell2 = row.insertCell(-1);
         var td2  = document.createElement('td');
         td2.setAttribute('align', 'center');
         row.appendChild(td2);
-        var cell3 = row.insertCell(-1);
-        var cell4 = row.insertCell(-1);
-        var cell5 = row.insertCell(-1);
-        cell1.style.textAlign = "center";
-        cell1.innerHTML = "2";
+        var td3 = row.insertCell(-1);
+        var td4 = row.insertCell(-1);
+        var td5 = row.insertCell(-1);
+        td1.style.textAlign = "center";
+        td1.innerHTML = "2";
         var inputCourseNo = document.createElement("INPUT");
         inputCourseNo.type = "text";
         inputCourseNo.name = "CourseNo";
         inputCourseNo.value = "xxxxxx";
-        // inputCourseNo.maxlength = "6";
         inputCourseNo.setAttribute('maxlength',6);
         inputCourseNo.setAttribute('size',6);
         td2.appendChild(inputCourseNo);
-        // cell2.innerHTML = "CELL2";
-        cell3.innerHTML = "CELL3";
-        cell4.innerHTML = "CELL4";
+        // td2.innerHTML = "CELL2";
+        td3.innerHTML = "COURSE NAME";
+        td4.innerHTML = "CREDIT";
         var btnRemove = document.createElement("INPUT");
         btnRemove.type = "button";
         btnRemove.value = "Remove";
         btnRemove.setAttribute("onclick", "Remove(this);");
-        cell5.appendChild(btnRemove);
-        // cell5.innerHTML = "CELL5";
+        td1.appendChild(btnRemove);
+        td5.appendChild(createSelectLetterGradeDropDown());
+        // td5.innerHTML = "CELL5";
     };
 
     function Remove(button) {
@@ -94,7 +114,7 @@
                         <tr bgcolor="#EBF1F6" class="msan" id="course-1">
                             <td width="29" height="22" align="center">1</td>
                             <td width="84" height="22" align="center"><input type="text" name="CourseId" value="261405" style="text-align: center" maxlength="6" size="6"></td>
-                            <td width="314" height="22" align="left"><input type="text" name="CourseName" value="ADV COMPUTER ENGR TECH" style="width: 100%"></td>
+                            <td width="314" height="22" align="left">COURSE NAME</td>
                             <td height="22" align="center"><input type="text" name="CourseCredit" value="3" style="text-align: center" maxlength="1" size="1"></td>
                             <td width="78" height="22" align="center" class="msan">
                                 <select name="CourseLetterGrade">
