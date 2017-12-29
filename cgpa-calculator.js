@@ -4,8 +4,11 @@ var idxMyCourse = 2;
 var overallCredits = 0.0;
 var overallGPA = 0.0;
 var overallGradePoints = 0.0;
+var nextCredits = 0.0;
+var nextGradePoints = 0.0
+var nextGPA = 0.0;
 var expectedCredits = 0.0;
-var expectedGradePoints = 0.0
+var expectedGradePoints = 0.0;
 var expectedCGPA = 0.0;
 
 function ConvertGradeToNumber(gradeChar) {
@@ -44,7 +47,7 @@ function createCourseNoInput() {
     var inputCourseNo = document.createElement("INPUT");
     inputCourseNo.type = "text";
     inputCourseNo.name = "CourseNo";
-    inputCourseNo.value = "xxxxxx";
+    inputCourseNo.value = "0";
     inputCourseNo.style.textAlign = "center";
     inputCourseNo.setAttribute('maxlength',6);
     inputCourseNo.setAttribute('size',6);
@@ -108,11 +111,11 @@ function myCreateFunction() {
 
     $("#myCourseCredit-"+idxMyCourse).on('change keydown paste input', function(){
         // console.log("-> " + $( this ).val() );
-        ExpectCGPA();
+        CalculateExpectedGrades();
     });
     $("#myCourseLetterGrade-"+idxMyCourse).on('change keydown paste input', function(){
         // console.log("-> " + $( this ).val() );
-        ExpectCGPA();
+        CalculateExpectedGrades();
     });    
 
     idxMyCourse++;
@@ -132,24 +135,33 @@ function Remove(button) {
     }
 };
 
-function ExpectCGPA() {
+function CalculateExpectedGrades() {
     // console.log(overallGradePoints);
-    expectedCredits = overallCredits;
-    expectedGradePoints = overallGradePoints;
+    nextCredits = 0.0;
+    nextGradePoints = 0.0;
     for (let index = 1; index <= idxMyCourse; index++) {
         const credit = Number.parseInt($("#myCourseCredit-"+index).val());
         const letterGrade = $("#myCourseLetterGrade-"+index).val();
         const grade = ConvertGradeToNumber(letterGrade);
         const gradePoint = credit * grade;
         if (grade != - 1) {
-            expectedCredits += credit;
-            expectedGradePoints += gradePoint;
+            nextCredits += credit;
+            nextGradePoints += gradePoint;
         }
-        console.log("expectedCredits = " + expectedCredits);
-        console.log("expectedGradePoints = " + expectedGradePoints);
+        // console.log("nextCredits = " + nextCredits);
+        // console.log("nextGradePoints = " + nextGradePoints);
     }
+    nextGPA = nextGradePoints / nextCredits;
+    nextGPA = nextGPA.toFixed(2);
+    $('#nextEnrolledCredits').text(nextCredits);
+    $('#nextGotCredits').text(nextCredits);
+    $('#nextGPA').text(nextGPA);
+    expectedCredits = overallCredits + nextCredits;
+    expectedGradePoints = overallGradePoints + nextGradePoints;
     expectedCGPA = expectedGradePoints / expectedCredits;
     expectedCGPA = expectedCGPA.toFixed(2);
+    $('#expectedEnrolledCredits').text(expectedCredits);
+    $('#expectedGotCredits').text(expectedCredits);
     $('#expectedCGPA').text(expectedCGPA);
 };
 
@@ -202,7 +214,7 @@ if (document.title.indexOf(pageTitle) != -1) {
     //     $('html body center > hr').last().after(data);
     // });
 
-    $('html body center > hr').last().after('<br> <table id="cgpa-calculator-table" border="0" align="center" cellpadding="0" cellspacing="0" width="597" bgcolor="#0068D0"> <tbody> <tr id="table-caption"> <td bgcolor="#FFFFFF" width="597" align="center" class="msan"> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img src="images/grade-top-left.gif" width="14" height="29"> </td> <td width="723" height="20" align="center" background="images/grade-top-bg.gif" bgcolor="#FFFFFF" class="msan12">Expected Letter Grades in the Next Semester <!-- <b>1</b> ปีการศึกษา <b>2560</b> --> </td> <td width="14" height="20" align="right" valign="top"> <img src="images/grade-top-right.gif" width="14" height="29"> </td> </tr> </tbody> </table> </td> </tr> <tr> <td width="597" bgcolor="#FFFFFF"> <table id="table-main" border="0" cellspacing="1" cellpadding="2" width="100%" bgcolor="#A2BCD9"> <tbody> <tr bgcolor="#C6E2FF" class="msan" id="table-header"> <td width="29" height="26" align="center" bgcolor="#CFDEEB" class="taho7"> <b>NO</b> </td> <td width="84" align="center" bgcolor="#CFDEEB" class="taho7"> <b>COURSE NO</b> </td> <td width="314" align="center" bgcolor="#CFDEEB" class="taho7"> <b>TITLE</b> </td> <td width="66" align="center" bgcolor="#CFDEEB" class="taho7"> <b>CREDIT</b> </td> <td width="78" align="center" bgcolor="#CFDEEB" class="taho7"> <b>GRADE</b> </td> </tr> <tr id="myCourseTR-1" bgcolor="#EBF1F6" class="msan"> <td width="29" height="22" align="center">1</td> <td width="84" height="22" align="center"><input type="text" name="CourseId" value="261405" style="text-align: center" maxlength="6" size="6"></td> <td width="314" height="22" align="left">COURSE NAME</td> <td height="22" align="center"><input id="myCourseCredit-1" type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td> <td width="78" height="22" align="center" class="msan"> <select id="myCourseLetterGrade-1" name="CourseLetterGrade"> <option value="-">-</option> <option value="A">A</option> <option value="B+">B+</option> <option value="B">B</option> <option value="C+">C+</option> <option value="C">C</option> <option value="D+">D+</option> <option value="D">D</option> <option value="F">F</option> <option value="S">S</option> </select> </td> </tr> </tbody> </table> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img src="images/grade-bottom-left.gif" width="14" height="21"> </td> <td width="723" height="20" align="center" background="images/grade-bottom-bg.gif" bgcolor="#FFFFFF"></td> <td width="14" height="20" align="right" valign="top"> <img src="images/grade-bottom-right.gif" width="14" height="21"> </td> </tr> </tbody> </table> </td> </tr> </tbody> </table> <br> <INPUT id="AddNewCourse" type="button" value="Add" class="btn_medium" /> <br> <hr width="520" size="1">');
+    $('html body center > hr').last().after('<br> <table id="cgpa-calculator-table" border="0" align="center" cellpadding="0" cellspacing="0" width="597" bgcolor="#0068D0"> <tbody> <tr id="table-caption"> <td bgcolor="#FFFFFF" width="597" align="center" class="msan"> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img src="images/grade-top-left.gif" width="14" height="29"> </td> <td width="723" height="20" align="center" background="images/grade-top-bg.gif" bgcolor="#FFFFFF" class="msan12">Expected Letter Grades in the Next Semester <!-- <b>1</b> ปีการศึกษา <b>2560</b> --> </td> <td width="14" height="20" align="right" valign="top"> <img src="images/grade-top-right.gif" width="14" height="29"> </td> </tr> </tbody> </table> </td> </tr> <tr> <td width="597" bgcolor="#FFFFFF"> <table id="table-main" border="0" cellspacing="1" cellpadding="2" width="100%" bgcolor="#A2BCD9"> <tbody> <tr bgcolor="#C6E2FF" class="msan" id="table-header"> <td width="29" height="26" align="center" bgcolor="#CFDEEB" class="taho7"> <b>NO</b> </td> <td width="84" align="center" bgcolor="#CFDEEB" class="taho7"> <b>COURSE NO</b> </td> <td width="314" align="center" bgcolor="#CFDEEB" class="taho7"> <b>TITLE</b> </td> <td width="66" align="center" bgcolor="#CFDEEB" class="taho7"> <b>CREDIT</b> </td> <td width="78" align="center" bgcolor="#CFDEEB" class="taho7"> <b>GRADE</b> </td> </tr> <tr id="myCourseTR-1" bgcolor="#EBF1F6" class="msan"> <td width="29" height="22" align="center">1</td> <td width="84" height="22" align="center"><input type="text" name="CourseId" value="" style="text-align: center" maxlength="6" size="6"></td> <td width="314" height="22" align="left">COURSE NAME</td> <td height="22" align="center"><input id="myCourseCredit-1" type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td> <td width="78" height="22" align="center" class="msan"> <select id="myCourseLetterGrade-1" name="CourseLetterGrade"> <option value="-">-</option> <option value="A">A</option> <option value="B+">B+</option> <option value="B">B</option> <option value="C+">C+</option> <option value="C">C</option> <option value="D+">D+</option> <option value="D">D</option> <option value="F">F</option> <option value="S">S</option> </select> </td> </tr> </tbody> </table> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img src="images/grade-bottom-left.gif" width="14" height="21"> </td> <td width="723" height="20" align="center" background="images/grade-bottom-bg.gif" bgcolor="#FFFFFF"></td> <td width="14" height="20" align="right" valign="top"> <img src="images/grade-bottom-right.gif" width="14" height="21"> </td> </tr> </tbody> </table> </td> </tr> </tbody> </table> <br> <INPUT id="AddNewCourse" type="button" value="Add" class="btn_medium" /> <br> <hr width="520" size="1">');
 
     // $('html body center > hr').last().after('<div id="foo">FOO!</div>');
 
@@ -210,15 +222,15 @@ if (document.title.indexOf(pageTitle) != -1) {
 
     $("#myCourseCredit-1").on('change keydown paste input', function(){
         // console.log( $( this ).val() );
-        ExpectCGPA();
+        CalculateExpectedGrades();
     });
 
     $("#myCourseLetterGrade-1").on('change keydown paste input', function(){
         // console.log( $( this ).val() );
-        ExpectCGPA();
+        CalculateExpectedGrades();
     });
 
-    $('#AddNewCourse').after('<br><br> <table width="431" height="38" border="0" cellpadding="4" cellspacing="1" bgcolor="#A2BCD9"> <tbody> <tr> <td width="82" height="10" valign="middle" align="center" bgcolor="#CFDEEB">ผลการศึกษา</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#CFDEEB">หน่วยกิตที่ลง</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#CFDEEB">หน่วยกิตที่ได้</td> <td width="78" height="10" valign="middle" align="center" bgcolor="#CFDEEB">เกรดเฉลี่ย</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#CFDEEB">ภาคการศึกษา<b>หน้า</b></td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;22&nbsp;</td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;22&nbsp;</td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;4.00&nbsp;</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#CFDEEB"><b>คาดหมาย</b>สะสมทั้งหมด</td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;139&nbsp;</td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;139&nbsp;</td> <td id="expectedCGPA" height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;3.87&nbsp;</td> </tr> </tbody> </table> <br> <hr width="520" size="1">');
+    $('#AddNewCourse').after('<br><br> <table width="431" height="38" border="0" cellpadding="4" cellspacing="1" bgcolor="#A2BCD9"> <tbody> <tr> <td width="82" height="10" valign="middle" align="center" bgcolor="#CFDEEB">ผลการศึกษา</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#CFDEEB">หน่วยกิตที่ลง</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#CFDEEB">หน่วยกิตที่ได้</td> <td width="78" height="10" valign="middle" align="center" bgcolor="#CFDEEB">เกรดเฉลี่ย</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#CFDEEB">ภาคการศึกษา<b>หน้า</b></td> <td id="nextEnrolledCredits" height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;0&nbsp;</td> <td id="nextGotCredits" height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;0&nbsp;</td> <td id="nextGPA" height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;0.00&nbsp;</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#CFDEEB"><b>คาดหมาย</b>สะสมทั้งหมด</td> <td id="expectedEnrolledCredits" height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;0&nbsp;</td> <td id="expectedGotCredits" height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;0&nbsp;</td> <td id="expectedCGPA" height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;0.00&nbsp;</td> </tr> </tbody> </table> <br> <hr width="520" size="1">');
 
     // $("#myCourseCredit-1").on('change keydown paste input', function(){
     //     console.log( $( this ).text() );
