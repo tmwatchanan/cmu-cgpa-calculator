@@ -97,19 +97,16 @@ function addNewCourseRow() {
     var td5 = row.insertCell(-1);
     var inputCourseNo = createCourseNoInput();
     td2.appendChild(inputCourseNo);
-    // td2.innerHTML = "CELL2";
     td3.innerHTML = "COURSE NAME";
     td4.appendChild(createCourseCreditInput());
     td4.setAttribute('align', 'center');
-    // td4.innerHTML = "CREDIT";
-    var btnRemove = document.createElement("INPUT");
-    btnRemove.type = "button";
-    btnRemove.value = "Remove";
-    btnRemove.setAttribute("onclick", "Remove(this);");
-    td1.appendChild(btnRemove);
+    // var btnRemove = document.createElement("INPUT");
+    // btnRemove.type = "button";
+    // btnRemove.value = "Remove";
+    // btnRemove.setAttribute("onclick", "Remove(this);");
+    // td1.appendChild(btnRemove);
     td5.appendChild(createSelectLetterGradeDropDown());
     td5.setAttribute('align', 'center');
-    // td5.innerHTML = "CELL5";
 
     $("#myCourseCredit-"+idxMyCourse).on('change keydown paste input', function(){
         // console.log("-> " + $( this ).val() );
