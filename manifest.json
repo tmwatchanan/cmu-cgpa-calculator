@@ -15,7 +15,17 @@
         }
     ],
     "web_accessible_resources": [
-        "table-template.html"
+        "table-template.html",
+        "images/wait-bottom-bg2.gif",
+        "images/wait-bottom-left2.gif",
+        "images/wait-bottom-right2.gif",
+        "images/wait-no-bg.gif",
+        "images/wait-no-left.gif",
+        "images/wait-no-right.gif",
+        "images/wait-top-bg.gif",
+        "images/wait-top-left.gif",
+        "images/wait-top-right.gif"
+
     ],
     "background":
     {
