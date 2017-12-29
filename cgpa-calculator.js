@@ -253,28 +253,4 @@ if (document.title.indexOf(pageTitle) != -1) {
 
     $('#AddNewCourse').after('<br> <br> <table width="431" height="38" border="0" cellpadding="4" cellspacing="1" bgcolor="#A2BCD9"> <tbody> <tr> <td width="82" height="10" valign="middle" align="center" bgcolor="#FFC6C7">ผลการศึกษา</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#FFC6C7">หน่วยกิตที่ลง</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#FFC6C7">หน่วยกิตที่ได้</td> <td width="78" height="10" valign="middle" align="center" bgcolor="#FFC6C7">เกรดเฉลี่ย</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#FFC6C7">ภาคการศึกษา<b>หน้า</b></td> <td id="nextEnrolledCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td> <td id="nextGotCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td> <td id="nextGPA" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0.00&nbsp;</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#FFC6C7"><b>คาดหมาย</b>สะสมทั้งหมด</td> <td id="expectedEnrolledCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td> <td id="expectedGotCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td> <td id="expectedCGPA" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0.00&nbsp;</td> </tr> </tbody> </table> <br>');
     CalculateExpectedGrades();
-
-    // grades.forEach(element => {
-    //     console.log("grade: " + element + "\n");
-    // });
-    // $('html body center table').eq(1).find('tbody tr.msan').find('td:last-child').html('<b>RegCMU</b>');
-    
-    // var studentIdList = [];
-    // // $('html body center div table tbody tr').each(function() { studentIdList.push($(this).text()) });
-    // var tableObject = $("html body center div table tbody tr.msan")
-    // .clone()
-    // .find('td:first').remove().end()
-    // .find('td:last').remove().end()
-    // .children()
-    // .clone()
-    // .children()
-    // .remove()	//remove all the children
-    // .end()	//again go back to selected element
-    // tableObject.each(function() { studentIdList.push($(this).text()) });
-    // filtered = studentIdList.filter(function(el, index) {
-    //     return index % 2 === 0;
-    // });
-
-    // $( "tr.msan td:nth-child(4)" ).append( "<img src=\"" + studentPictureList[0] + "\">" );
-    // $( "tr.msan td:nth-child(4)" ).append( "<span>pic here!</span>" );
 }
