@@ -13,5 +13,8 @@
                 "cgpa-calculator.js"
             ]
         }
+    ],
+    "web_accessible_resources": [
+        "table-template.html"
     ]
 }

@@ -81,7 +81,10 @@ if (document.title.indexOf(pageTitle) != -1) {
 
 // SECTION: EXPECTED GRADES
 
-    $('html body center > hr').last().after('<div id="foo">FOO!</div>');
+    $.get(chrome.extension.getURL('table-template.html'), function(data){
+        $('html body center > hr').last().after(data);
+    });
+    // $('html body center > hr').last().after('<div id="foo">FOO!</div>');
 
     
     // $( "p" ).insertAfter( "#foo" );
