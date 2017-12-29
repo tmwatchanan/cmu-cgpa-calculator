@@ -1,6 +1,12 @@
 var pageTitle = "ผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่";
 
 var idxMyCourse = 2;
+var overallCredits = 0.0;
+var overallGPA = 0.0;
+var overallGradePoints = 0.0;
+var expectedCredits = 0.0;
+var expectedGradePoints = 0.0
+var expectedCGPA = 0.0;
 
 function ConvertGradeToNumber(gradeChar) {
     switch (gradeChar) {
@@ -39,6 +45,7 @@ function createCourseNoInput() {
     inputCourseNo.type = "text";
     inputCourseNo.name = "CourseNo";
     inputCourseNo.value = "xxxxxx";
+    inputCourseNo.style.textAlign = "center";
     inputCourseNo.setAttribute('maxlength',6);
     inputCourseNo.setAttribute('size',6);
     return inputCourseNo;
@@ -50,6 +57,7 @@ function createCourseCreditInput(idx) {
     inputCourseCredit.type = "text";
     inputCourseCredit.name = "CourseCredit";
     inputCourseCredit.value = "0";
+    inputCourseCredit.style.textAlign = "center";
     inputCourseCredit.setAttribute('maxlength',1);
     inputCourseCredit.setAttribute('size',1);
     return inputCourseCredit;
@@ -74,20 +82,20 @@ function myCreateFunction() {
     row.setAttribute('id', 'myCourseTR-'+idxMyCourse);
     row.style.backgroundColor = "#EBF1F6";
     var td1 = row.insertCell(-1);
-    // var cell2 = row.insertCell(-1);
+    td1.style.textAlign = "center";
+    td1.innerHTML = idxMyCourse;
     var td2  = document.createElement('td');
     td2.setAttribute('align', 'center');
     row.appendChild(td2);
     var td3 = row.insertCell(-1);
     var td4 = row.insertCell(-1);
     var td5 = row.insertCell(-1);
-    td1.style.textAlign = "center";
-    td1.innerHTML = idxMyCourse;
     var inputCourseNo = createCourseNoInput();
     td2.appendChild(inputCourseNo);
     // td2.innerHTML = "CELL2";
     td3.innerHTML = "COURSE NAME";
     td4.appendChild(createCourseCreditInput());
+    td4.setAttribute('align', 'center');
     // td4.innerHTML = "CREDIT";
     var btnRemove = document.createElement("INPUT");
     btnRemove.type = "button";
@@ -95,13 +103,16 @@ function myCreateFunction() {
     btnRemove.setAttribute("onclick", "Remove(this);");
     td1.appendChild(btnRemove);
     td5.appendChild(createSelectLetterGradeDropDown());
+    td5.setAttribute('align', 'center');
     // td5.innerHTML = "CELL5";
 
     $("#myCourseCredit-"+idxMyCourse).on('change keydown paste input', function(){
-        console.log("-> " + $( this ).val() );
+        // console.log("-> " + $( this ).val() );
+        ExpectCGPA();
     });
     $("#myCourseLetterGrade-"+idxMyCourse).on('change keydown paste input', function(){
-        console.log("-> " + $( this ).val() );
+        // console.log("-> " + $( this ).val() );
+        ExpectCGPA();
     });    
 
     idxMyCourse++;
@@ -121,6 +132,27 @@ function Remove(button) {
     }
 };
 
+function ExpectCGPA() {
+    // console.log(overallGradePoints);
+    expectedCredits = overallCredits;
+    expectedGradePoints = overallGradePoints;
+    for (let index = 1; index <= idxMyCourse; index++) {
+        const credit = Number.parseInt($("#myCourseCredit-"+index).val());
+        const letterGrade = $("#myCourseLetterGrade-"+index).val();
+        const grade = ConvertGradeToNumber(letterGrade);
+        const gradePoint = credit * grade;
+        if (grade != - 1) {
+            expectedCredits += credit;
+            expectedGradePoints += gradePoint;
+        }
+        console.log("expectedCredits = " + expectedCredits);
+        console.log("expectedGradePoints = " + expectedGradePoints);
+    }
+    expectedCGPA = expectedGradePoints / expectedCredits;
+    expectedCGPA = expectedCGPA.toFixed(2);
+    $('#expectedCGPA').text(expectedCGPA);
+};
+
 // Check page title
 if (document.title.indexOf(pageTitle) != -1) {
     console.log("RegCMU CGPA CAlculator has been activated!");
@@ -135,10 +167,6 @@ if (document.title.indexOf(pageTitle) != -1) {
     //     $('html body center > table').eq(term_year).html("TERM: " + term_year);
     // }
 
-    // $('html body center > table').html("First Table [1/1]");
-    var overallGPA = 0.0;
-    var overallCredits = 0.0;
-    var overallGradePoints = 0.0;
     for (let term_year = 1; term_year < numTableFound; term_year+=2) {
         var credits = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(4)').map(function() {
             return $(this).text();
@@ -181,12 +209,16 @@ if (document.title.indexOf(pageTitle) != -1) {
     $('#AddNewCourse').click(myCreateFunction);
 
     $("#myCourseCredit-1").on('change keydown paste input', function(){
-        console.log( $( this ).val() );
+        // console.log( $( this ).val() );
+        ExpectCGPA();
     });
 
     $("#myCourseLetterGrade-1").on('change keydown paste input', function(){
-        console.log( $( this ).val() );
+        // console.log( $( this ).val() );
+        ExpectCGPA();
     });
+
+    $('#AddNewCourse').after('<br><br> <table width="431" height="38" border="0" cellpadding="4" cellspacing="1" bgcolor="#A2BCD9"> <tbody> <tr> <td width="82" height="10" valign="middle" align="center" bgcolor="#CFDEEB">ผลการศึกษา</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#CFDEEB">หน่วยกิตที่ลง</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#CFDEEB">หน่วยกิตที่ได้</td> <td width="78" height="10" valign="middle" align="center" bgcolor="#CFDEEB">เกรดเฉลี่ย</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#CFDEEB">ภาคการศึกษา<b>หน้า</b></td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;22&nbsp;</td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;22&nbsp;</td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;4.00&nbsp;</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#CFDEEB"><b>คาดหมาย</b>สะสมทั้งหมด</td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;139&nbsp;</td> <td height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;139&nbsp;</td> <td id="expectedCGPA" height="13" valign="middle" align="center" bgcolor="#EBF1F6">&nbsp;3.87&nbsp;</td> </tr> </tbody> </table> <br> <hr width="520" size="1">');
 
     // $("#myCourseCredit-1").on('change keydown paste input', function(){
     //     console.log( $( this ).text() );
