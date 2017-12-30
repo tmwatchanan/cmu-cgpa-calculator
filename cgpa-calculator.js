@@ -174,7 +174,7 @@ function addNewCourseRow() {
     row.style.backgroundColor = "#FFE3E4";
     var td1 = row.insertCell(-1);
     td1.style.textAlign = "center";
-    td1.innerHTML = idxMyCourse;
+    td1.textContent = idxMyCourse;
     var td2  = document.createElement('td');
     td2.setAttribute('align', 'center');
     row.appendChild(td2);
@@ -183,7 +183,7 @@ function addNewCourseRow() {
     var td5 = row.insertCell(-1);
     var inputCourseNo = createCourseNoInput();
     td2.appendChild(inputCourseNo);
-    td3.innerHTML = "COURSE NAME " + idxMyCourse;
+    td3.textContent = "COURSE NAME " + idxMyCourse;
     td4.appendChild(createCourseCreditInput());
     td4.setAttribute('align', 'center');
     // var btnRemove = document.createElement("INPUT");
