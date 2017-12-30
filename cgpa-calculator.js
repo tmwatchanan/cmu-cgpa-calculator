@@ -237,7 +237,8 @@ function CalculateExpectedGrades() {
     // console.log(overallGradePoints);
     nextCredits = 0;
     nextGradePoints = 0.0;
-    nextCreditsIncludeGradeS = 0;
+    nextCreditsGradeS = 0;
+    nextCreditsGradeP = 0;
     for (let index = 1; index <= idxMyCourse; index++) {
         var inputCredit = $("#myCourseCredit-"+index).val();
         if (inputCredit == '') {
@@ -313,6 +314,7 @@ if (document.title.indexOf(pageTitle) != -1) {
                 sumCredits += credit;
                 sumGradePoints += (credit * grade);
             } else if (letterGrade == 'S') {
+                console.log("IN S");
                 overallCreditsGradeS += credit;
             } else if (letterGrade == 'P') {
                 overallCreditsGradeP += credit;
