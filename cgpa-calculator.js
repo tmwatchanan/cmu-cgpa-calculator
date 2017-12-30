@@ -314,7 +314,6 @@ if (document.title.indexOf(pageTitle) != -1) {
                 sumCredits += credit;
                 sumGradePoints += (credit * grade);
             } else if (letterGrade == 'S') {
-                console.log("IN S");
                 overallCreditsGradeS += credit;
             } else if (letterGrade == 'P') {
                 overallCreditsGradeP += credit;
