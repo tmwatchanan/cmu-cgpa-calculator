@@ -9,11 +9,11 @@ new Noty({
             var n = this;
             var Timeline = new mojs.Timeline();
             var body = new mojs.Html({
-                el        : n.barDom,
-                x         : {500: 0, delay: 0, duration: 1000, easing: 'elastic.out'},
-                isForce3d : true,
+                el: n.barDom,
+                x: { 500: 0, delay: 0, duration: 1000, easing: 'elastic.out' },
+                isForce3d: true,
                 onComplete: function () {
-                    promise(function(resolve) {
+                    promise(function (resolve) {
                         resolve();
                     })
                 }
@@ -21,11 +21,11 @@ new Noty({
 
             var parent = new mojs.Shape({
                 parent: n.barDom,
-                width      : 200,
-                height     : n.barDom.getBoundingClientRect().height,
-                radius     : 0,
-                x          : {[150]: -150},
-                duration   : 1.2 * 1000,
+                width: 200,
+                height: n.barDom.getBoundingClientRect().height,
+                radius: 0,
+                x: { [150]: -150 },
+                duration: 1.2 * 1000,
                 isShowStart: true
             });
 
@@ -33,35 +33,35 @@ new Noty({
             parent.el.style['overflow'] = 'hidden';
 
             var burst = new mojs.Burst({
-                parent  : parent.el,
-                count   : 10,
-                top     : n.barDom.getBoundingClientRect().height + 75,
-                degree  : 90,
-                radius  : 75,
-                angle   : {[-90]: 40},
+                parent: parent.el,
+                count: 10,
+                top: n.barDom.getBoundingClientRect().height + 75,
+                degree: 90,
+                radius: 75,
+                angle: { [-90]: 40 },
                 children: {
-                    fill     : '#EBD761',
-                    delay    : 'stagger(500, -50)',
-                    radius   : 'rand(8, 25)',
+                    fill: '#EBD761',
+                    delay: 'stagger(500, -50)',
+                    radius: 'rand(8, 25)',
                     direction: -1,
-                    isSwirl  : true
+                    isSwirl: true
                 }
             });
 
             var fadeBurst = new mojs.Burst({
-                parent  : parent.el,
-                count   : 2,
-                degree  : 0,
-                angle   : 75,
-                radius  : {0: 100},
-                top     : '90%',
+                parent: parent.el,
+                count: 2,
+                degree: 0,
+                angle: 75,
+                radius: { 0: 100 },
+                top: '90%',
                 children: {
-                    fill     : '#EBD761',
+                    fill: '#EBD761',
                     pathScale: [.65, 1],
-                    radius   : 'rand(12, 15)',
+                    radius: 'rand(12, 15)',
                     direction: [-1, 1],
-                    delay    : .8 * 1000,
-                    isSwirl  : true
+                    delay: .8 * 1000,
+                    isSwirl: true
                 }
             });
 
@@ -71,12 +71,12 @@ new Noty({
         close: function (promise) {
             var n = this;
             new mojs.Html({
-                el        : n.barDom,
-                x         : {0: 500, delay: 10, duration: 500, easing: 'cubic.out'},
-                skewY     : {0: 10, delay: 10, duration: 500, easing: 'cubic.out'},
-                isForce3d : true,
+                el: n.barDom,
+                x: { 0: 500, delay: 10, duration: 500, easing: 'cubic.out' },
+                skewY: { 0: 10, delay: 10, duration: 500, easing: 'cubic.out' },
+                isForce3d: true,
                 onComplete: function () {
-                    promise(function(resolve) {
+                    promise(function (resolve) {
                         resolve();
                     })
                 }
@@ -145,32 +145,32 @@ function ConvertGradeToNumber(gradeChar) {
 
 function createCourseNoInput() {
     var inputCourseNo = document.createElement("INPUT");
-    inputCourseNo.setAttribute('id', 'myCourseNo-'+idxMyCourse);
+    inputCourseNo.setAttribute('id', 'myCourseNo-' + idxMyCourse);
     inputCourseNo.type = "text";
     inputCourseNo.name = "CourseNo";
     inputCourseNo.value = "";
     inputCourseNo.style.textAlign = "center";
-    inputCourseNo.setAttribute('maxlength',6);
-    inputCourseNo.setAttribute('size',6);
+    inputCourseNo.setAttribute('maxlength', 6);
+    inputCourseNo.setAttribute('size', 6);
     return inputCourseNo;
 }
 
 function createCourseCreditInput(idx) {
     var inputCourseCredit = document.createElement("INPUT");
-    inputCourseCredit.setAttribute('id', 'myCourseCredit-'+idxMyCourse);
+    inputCourseCredit.setAttribute('id', 'myCourseCredit-' + idxMyCourse);
     inputCourseCredit.type = "text";
     inputCourseCredit.name = "CourseCredit";
     inputCourseCredit.value = "0";
     inputCourseCredit.style.textAlign = "center";
-    inputCourseCredit.setAttribute('maxlength',1);
-    inputCourseCredit.setAttribute('size',1);
+    inputCourseCredit.setAttribute('maxlength', 1);
+    inputCourseCredit.setAttribute('size', 1);
     return inputCourseCredit;
 }
 
 function createSelectLetterGradeDropDown(idx) {
-    var array = ["-","A","B+","B","C+","C","D+","D","F","S","P"];
+    var array = ["-", "A", "B+", "B", "C+", "C", "D+", "D", "F", "S", "P"];
     var selectList = document.createElement("select");
-    selectList.id = "myCourseLetterGrade-"+idxMyCourse;
+    selectList.id = "myCourseLetterGrade-" + idxMyCourse;
     for (var i = 0; i < array.length; i++) {
         var option = document.createElement("option");
         option.value = array[i];
@@ -183,12 +183,12 @@ function createSelectLetterGradeDropDown(idx) {
 function addNewCourseRow() {
     var table = document.getElementById("table-main");
     var row = table.insertRow(-1);
-    row.setAttribute('id', 'myCourseTR-'+idxMyCourse);
+    row.setAttribute('id', 'myCourseTR-' + idxMyCourse);
     row.style.backgroundColor = "#FFE3E4";
     var td1 = row.insertCell(-1);
     td1.style.textAlign = "center";
     td1.textContent = idxMyCourse;
-    var td2  = document.createElement('td');
+    var td2 = document.createElement('td');
     td2.setAttribute('align', 'center');
     row.appendChild(td2);
     var td3 = row.insertCell(-1);
@@ -196,7 +196,7 @@ function addNewCourseRow() {
     var td5 = row.insertCell(-1);
     var inputCourseNo = createCourseNoInput();
     td2.appendChild(inputCourseNo);
-    td3.setAttribute('id', 'myCourseName-'+idxMyCourse);
+    td3.setAttribute('id', 'myCourseName-' + idxMyCourse);
     td3.textContent = "COURSE NAME";
     td4.appendChild(createCourseCreditInput());
     td4.setAttribute('align', 'center');
@@ -208,7 +208,7 @@ function addNewCourseRow() {
     btnRemove.type = "button";
     btnRemove.value = "X";
     // btnRemove.setAttribute("onclick", "RemoveThisRow(row);");
-    btnRemove.onclick = function() {
+    btnRemove.onclick = function () {
         //Determine the reference of the Row using the Button.
         var row = this.parentNode.parentNode;
         var name = row.getElementsByTagName("td")[0].innerHTML;
@@ -221,14 +221,14 @@ function addNewCourseRow() {
     };
     td6.appendChild(btnRemove);
 
-    $("#myCourseNo-"+idxMyCourse).on('change keydown paste input', function(){
-        GetCourseInformationFromAPI( $(this), $(this).attr("id") );
+    $("#myCourseNo-" + idxMyCourse).on('change keydown paste input', function () {
+        GetCourseInformationFromAPI($(this), $(this).attr("id"));
     });
-    $("#myCourseCredit-"+idxMyCourse).on('change keydown paste input', function(){
+    $("#myCourseCredit-" + idxMyCourse).on('change keydown paste input', function () {
         // console.log("-> " + $( this ).val() );
         CalculateExpectedGrades();
     });
-    $("#myCourseLetterGrade-"+idxMyCourse).on('change keydown paste input', function(){
+    $("#myCourseLetterGrade-" + idxMyCourse).on('change keydown paste input', function () {
         // console.log("-> " + $( this ).val() );
         CalculateExpectedGrades();
     });
@@ -259,12 +259,12 @@ function CalculateExpectedGrades() {
     nextCreditsGradeP = 0;
     nextCreditsGradeF = 0;
     for (let index = 1; index <= idxMyCourse; index++) {
-        var inputCredit = $("#myCourseCredit-"+index).val();
+        var inputCredit = $("#myCourseCredit-" + index).val();
         if (inputCredit == '') {
             inputCredit = '0';
         }
         const credit = Number.parseInt(inputCredit);
-        const letterGrade = $("#myCourseLetterGrade-"+index).val();
+        const letterGrade = $("#myCourseLetterGrade-" + index).val();
         const grade = ConvertGradeToNumber(letterGrade);
         const gradePoint = credit * grade;
         if (grade != -1) {
@@ -289,14 +289,14 @@ function CalculateExpectedGrades() {
         // console.log("nextGradePoints = " + nextGradePoints);
     }
     nextGPA = nextGradePoints / nextCredits;
-    nextGPA = nextGPA.toFixed(2);
+    nextGPA = roundNumber(nextGPA, 2);
     $('#nextEnrolledCredits').text(nextCredits);
     $('#nextGotCredits').text(nextCredits);
     $('#nextGPA').text(isNaN(nextGPA) ? 0.00.toFixed(2) : nextGPA);
     expectedCredits = overallCredits + nextCredits;
     expectedGradePoints = overallGradePoints + nextGradePoints;
     expectedCGPA = expectedGradePoints / expectedCredits;
-    expectedCGPA = expectedCGPA.toFixed(2);
+    expectedCGPA = roundNumber(expectedCGPA, 2);
     $('#expectedEnrolledCredits').text(regCmuEnrolledCredits + nextCredits + nextCreditsGradeS + nextCreditsGradeP);
     $('#expectedGotCredits').text(regCmuGotCredits + nextCredits + nextCreditsGradeS - nextCreditsGradeF);
     $('#expectedCGPA').text(expectedCGPA);
@@ -317,7 +317,7 @@ function GetCourseInformationFromAPI(element) {
     if (courseNo.length == 6) {
         const url = urlAPI + '/course/' + courseNo;
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange=function() {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var responseObj = JSON.parse(this.responseText);
                 var courseNameField = document.getElementById('myCourseName-' + noIdx);
@@ -347,25 +347,25 @@ if (document.title.indexOf(pageTitle) != -1) {
     // }
 
     // Check year and semester
-    for (let term_year = 1; term_year < numTableFound; term_year+=2) {
+    for (let term_year = 1; term_year < numTableFound; term_year += 2) {
         var tableHeaderText = $('html body center > table').eq(term_year).find('tbody tr td.msan12').text();
         const year = tableHeaderText.substring(tableHeaderText.lastIndexOf(" ") + 1, tableHeaderText.length);
         const yearNum = Number.parseInt(year);
         if (firstYear == -1) {
             firstYear = yearNum;
         }
-        if (yearNum == (firstYear + 4) && 
+        if (yearNum == (firstYear + 4) &&
             tableHeaderText.search("ฤดูร้อน") != -1) {
             summerAtYearFour = true;
         }
     }
-    
+
     var lastTable;
-    for (let term_year = 1; term_year < numTableFound; term_year+=2) {
-        var credits = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(4)').map(function() {
+    for (let term_year = 1; term_year < numTableFound; term_year += 2) {
+        var credits = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(4)').map(function () {
             return $(this).text();
         }).get();
-        var letterGrades = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(5)').map(function() {
+        var letterGrades = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(5)').map(function () {
             return $(this).text()
         }).get();
         // console.log(letterGrades);
@@ -399,7 +399,7 @@ if (document.title.indexOf(pageTitle) != -1) {
         overallGradePoints += sumGradePoints; // for CGPA
         overallCredits += sumCredits; // for CGPA
         var gpa = sumGradePoints / sumCredits;
-        gpa = gpa.toFixed(2);
+        gpa = roundNumber(gpa, 2);
         // console.log("GPA of this term [" + term_year + "] = " + gpa + " = " + sumGradePoints + "/" + sumCredits);
         lastTable = term_year + 1;
     }
@@ -413,7 +413,7 @@ if (document.title.indexOf(pageTitle) != -1) {
     // var regCmuCGPA = $('html body center > table').eq(lastTable).find('tbody tr').eq(2).find('td').eq(3).text();
     // console.log(regCmuEnrolledCredits, regCmuGotCredits, regCmuCGPA);
 
-// SECTION: EXPECTED GRADES
+    // SECTION: EXPECTED GRADES
 
     // $.get(chrome.extension.getURL('table-template.html'), function(data){
     //     $('html body center > hr').last().after(data);
@@ -434,20 +434,33 @@ if (document.title.indexOf(pageTitle) != -1) {
 
     $('#AddNewCourse').click(addNewCourseRow);
 
-    $("#myCourseNo-1").on('change keydown paste input', function(){
-        GetCourseInformationFromAPI( $(this), '1' );
+    $("#myCourseNo-1").on('change keydown paste input', function () {
+        GetCourseInformationFromAPI($(this), '1');
     });
 
-    $("#myCourseCredit-1").on('change keydown paste input', function(){
+    $("#myCourseCredit-1").on('change keydown paste input', function () {
         // console.log( $( this ).val() );
         CalculateExpectedGrades();
     });
 
-    $("#myCourseLetterGrade-1").on('change keydown paste input', function(){
+    $("#myCourseLetterGrade-1").on('change keydown paste input', function () {
         // console.log( $( this ).val() );
         CalculateExpectedGrades();
     });
 
     $('#AddNewCourse').after('<br> <br> <table width="431" height="38" border="0" cellpadding="4" cellspacing="1" bgcolor="#A2BCD9"> <tbody> <tr> <td width="82" height="10" valign="middle" align="center" bgcolor="#FFC6C7">ผลการศึกษา</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#FFC6C7">หน่วยกิตที่ลง</td> <td width="75" height="10" valign="middle" align="center" bgcolor="#FFC6C7">หน่วยกิตที่ได้</td> <td width="78" height="10" valign="middle" align="center" bgcolor="#FFC6C7">เกรดเฉลี่ย</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#FFC6C7">ภาคการศึกษา<b>หน้า</b></td> <td id="nextEnrolledCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td> <td id="nextGotCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td> <td id="nextGPA" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0.00&nbsp;</td> </tr> <tr> <td height="13" valign="middle" align="right" bgcolor="#FFC6C7"><b>คาดหมาย</b>สะสมทั้งหมด</td> <td id="expectedEnrolledCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td> <td id="expectedGotCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td> <td id="expectedCGPA" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0.00&nbsp;</td> </tr> </tbody> </table> <br>');
     CalculateExpectedGrades();
+}
+
+function roundNumber(num, scale) {
+    if (!("" + num).includes("e")) {
+        return +(Math.round(num + "e+" + scale) + "e-" + scale);
+    } else {
+        var arr = ("" + num).split("e");
+        var sig = ""
+        if (+arr[1] + scale > 0) {
+            sig = "+";
+        }
+        return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
+    }
 }
