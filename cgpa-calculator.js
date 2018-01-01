@@ -90,11 +90,13 @@ var idxMyCourse = 2;
 var overallCredits = 0;
 var overallCreditsGradeS = 0;
 var overallCreditsGradeP = 0;
+var overallCreditsGradeF = 0;
 var overallGPA = 0.0;
 var overallGradePoints = 0.0;
 var nextCredits = 0;
 var nextCreditsGradeS = 0;
 var nextCreditsGradeP = 0;
+var nextCreditsGradeF = 0;
 var nextGradePoints = 0.0
 var nextGPA = 0.0;
 var expectedCredits = 0;
@@ -246,6 +248,7 @@ function CalculateExpectedGrades() {
     nextGradePoints = 0.0;
     nextCreditsGradeS = 0;
     nextCreditsGradeP = 0;
+    nextCreditsGradeF = 0;
     for (let index = 1; index <= idxMyCourse; index++) {
         var inputCredit = $("#myCourseCredit-"+index).val();
         if (inputCredit == '') {
@@ -258,6 +261,9 @@ function CalculateExpectedGrades() {
         if (grade != -1) {
             nextCredits += credit;
             nextGradePoints += gradePoint;
+            if (letterGrade == 'F') {
+                nextCreditsGradeF += credit;
+            }
         } else if (letterGrade == 'S') {
             nextCreditsGradeS += credit;
         } else if (letterGrade == 'P') {
@@ -276,7 +282,7 @@ function CalculateExpectedGrades() {
     expectedCGPA = expectedGradePoints / expectedCredits;
     expectedCGPA = expectedCGPA.toFixed(2);
     $('#expectedEnrolledCredits').text(expectedCredits + nextCreditsGradeS + nextCreditsGradeP + overallCreditsGradeS + overallCreditsGradeP);
-    $('#expectedGotCredits').text(expectedCredits + nextCreditsGradeS + overallCreditsGradeS);
+    $('#expectedGotCredits').text(expectedCredits + nextCreditsGradeS + overallCreditsGradeS - overallCreditsGradeF - nextCreditsGradeF);
     $('#expectedCGPA').text(expectedCGPA);
 };
 
@@ -341,6 +347,9 @@ if (document.title.indexOf(pageTitle) != -1) {
             if (grade != -1) {
                 sumCredits += credit;
                 sumGradePoints += (credit * grade);
+                if (letterGrade == 'F') {
+                    overallCreditsGradeF += credit;
+                }
             } else if (letterGrade == 'S') {
                 overallCreditsGradeS += credit;
             } else if (letterGrade == 'P') {
