@@ -103,6 +103,14 @@ var expectedCredits = 0;
 var expectedGradePoints = 0.0;
 var expectedCGPA = 0.0;
 
+var regCmuEnrolledCredits = 0.0;
+var regCmuGotCredits = 0.0;
+
+var foundF = false;
+var foundU = false;
+var firstYear = -1;
+var summerAtYearFour = false;
+
 function ConvertGradeToNumber(gradeChar) {
     switch (gradeChar) {
         case 'A':
@@ -269,6 +277,13 @@ function CalculateExpectedGrades() {
         } else if (letterGrade == 'P') {
             nextCreditsGradeP += credit;
         }
+
+        // Check Award
+        if (letterGrade == 'F') {
+            foundF = true;
+        } else if (letterGrade == 'U') {
+            foundU = true;
+        }
         // console.log("nextCredits = " + nextCredits);
         // console.log("nextGradePoints = " + nextGradePoints);
     }
@@ -281,8 +296,8 @@ function CalculateExpectedGrades() {
     expectedGradePoints = overallGradePoints + nextGradePoints;
     expectedCGPA = expectedGradePoints / expectedCredits;
     expectedCGPA = expectedCGPA.toFixed(2);
-    $('#expectedEnrolledCredits').text(expectedCredits + nextCreditsGradeS + nextCreditsGradeP + overallCreditsGradeS + overallCreditsGradeP);
-    $('#expectedGotCredits').text(expectedCredits + nextCreditsGradeS + overallCreditsGradeS - overallCreditsGradeF - nextCreditsGradeF);
+    $('#expectedEnrolledCredits').text(regCmuEnrolledCredits + nextCredits + nextCreditsGradeS + nextCreditsGradeP);
+    $('#expectedGotCredits').text(regCmuGotCredits + nextCredits + nextCreditsGradeS - nextCreditsGradeF);
     $('#expectedCGPA').text(expectedCGPA);
 };
 
@@ -330,12 +345,27 @@ if (document.title.indexOf(pageTitle) != -1) {
     //     $('html body center > table').eq(term_year).html("TERM: " + term_year);
     // }
 
+    // Check year and semester
+    for (let term_year = 1; term_year < numTableFound; term_year+=2) {
+        var tableHeaderText = $('html body center > table').eq(term_year).find('tbody tr td.msan12').text();
+        const year = tableHeaderText.substring(tableHeaderText.lastIndexOf(" ") + 1, tableHeaderText.length);
+        const yearNum = Number.parseInt(year);
+        if (firstYear == -1) {
+            firstYear = yearNum;
+        }
+        if (yearNum == (firstYear + 4) && 
+            tableHeaderText.search("ฤดูร้อน") != -1) {
+            summerAtYearFour = true;
+        }
+    }
+    
+    var lastTable;
     for (let term_year = 1; term_year < numTableFound; term_year+=2) {
         var credits = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(4)').map(function() {
             return $(this).text();
         }).get();
         var letterGrades = $('html body center > table').eq(term_year).find('tbody tr.msan').not(':first').find('td:nth-child(5)').map(function() {
-            return $(this).text();
+            return $(this).text()
         }).get();
         // console.log(letterGrades);
         var sumCredits = 0.0;
@@ -355,6 +385,12 @@ if (document.title.indexOf(pageTitle) != -1) {
             } else if (letterGrade == 'P') {
                 overallCreditsGradeP += credit;
             }
+            // Check Award
+            if (letterGrade == 'F') {
+                foundF = true;
+            } else if (letterGrade == 'U') {
+                foundU = true;
+            }
             // console.log(credit + " x " + grade);
         }
         // console.log("sumGradeP " + sumGradePoints);
@@ -364,9 +400,17 @@ if (document.title.indexOf(pageTitle) != -1) {
         var gpa = sumGradePoints / sumCredits;
         gpa = gpa.toFixed(2);
         // console.log("GPA of this term [" + term_year + "] = " + gpa + " = " + sumGradePoints + "/" + sumCredits);
+        lastTable = term_year + 1;
     }
     // console.log("overallGradePoints = " + overallGradePoints);
     // console.log("overallCredits = " + overallCredits);
+
+    regCmuEnrolledCredits = $('html body center > table').eq(lastTable).find('tbody tr').eq(2).find('td').eq(1).text();
+    regCmuEnrolledCredits = Number.parseInt(regCmuEnrolledCredits);
+    regCmuGotCredits = $('html body center > table').eq(lastTable).find('tbody tr').eq(2).find('td').eq(2).text();
+    regCmuGotCredits = Number.parseInt(regCmuGotCredits);
+    // var regCmuCGPA = $('html body center > table').eq(lastTable).find('tbody tr').eq(2).find('td').eq(3).text();
+    // console.log(regCmuEnrolledCredits, regCmuGotCredits, regCmuCGPA);
 
 // SECTION: EXPECTED GRADES
 
