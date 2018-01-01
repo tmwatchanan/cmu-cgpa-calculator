@@ -1,7 +1,7 @@
 {
     "name": "RegCMU Cumulative GPA Calculator",
     "description": "Chrome Extension/FireFox add-on for calculating your expected cumulative GPA (CGPA) in the transcript page of Reg CMU",
-    "version": "1.9",
+    "version": "1.10",
     "manifest_version": 2,
     "content_scripts": [
         {
