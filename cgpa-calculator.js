@@ -217,6 +217,7 @@ function addNewCourseRow() {
         //Delete the Table row using it's Index.
         table.deleteRow(row.rowIndex);
         AdjustRowNumber();
+        CalculateExpectedGrades();
     };
     td6.appendChild(btnRemove);
 
