@@ -12,7 +12,7 @@
   - [RegCMU Cumulative GPA Calculator - Chrome Web Store](https://chrome.google.com/webstore/detail/regcmu-cumulative-gpa-cal/acneommdmgbcnangkfjdjcmnelkopgdi)
 
 + สำหรับ FireFox (ได้ทั้ง PC และ Mobile)
-  - [RegCMU Cumulative GPA Calculator – Add-ons for Firefox](https://addons.mozilla.org/en-US/firefox/addon/regcmu-cgpa-calculator/)
+  - [RegCMU Cumulative GPA Calculator – Add-ons for Firefox](https://addons.mozilla.org/en-US/firefox/addon/cmu-cgpa-calculator/)
 
 ### การใช้งาน
 1. เข้าไปยังหน้าเว็บไซต์ [ผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่](https://www3.reg.cmu.ac.th/transcript/) ของ สำนักทะเบียนและประมวลผล มหาวิทยาลัยเชียงใหม่
