@@ -226,7 +226,7 @@ function addNewCourseRow() {
     };
     td6.appendChild(btnRemove);
 
-    $("#myCourseNo-" + idxMyCourse).on('change keydown paste input', function () {
+    $("#myCourseNo-" + idxMyCourse).keyup(function () {
         GetCourseInformationFromAPI($(this), $(this).attr("id"));
     });
     $("#myCourseCredit-" + idxMyCourse).on('change keydown paste input', function () {
@@ -359,6 +359,7 @@ function GetEnrolledCourseListOfStudentIdFromAPI(studentId, semester, year) {
 };
 
 function GetCourseInformationFromAPI(element) {
+    // console.log("> GetCourseInformationFromAPI", element.val());
     const courseNo = element.val();
     const elementId = element.attr('id');
     const noIdx = elementId.substring(elementId.lastIndexOf("-") + 1, elementId.length);
@@ -369,7 +370,7 @@ function GetCourseInformationFromAPI(element) {
             if (this.readyState == 4 && this.status == 200) {
                 var responseObj = JSON.parse(this.responseText);
                 var courseNameField = document.getElementById('myCourseName-' + noIdx);
-                courseNameField.textContent = responseObj.courseName;
+                courseNameField.textContent = responseObj.courseName.toUpperCase();
                 var courseCreditField = document.getElementById('myCourseCredit-' + noIdx);
                 courseCreditField.value = responseObj.courseCredit;
             }
@@ -388,7 +389,7 @@ function FillTableWithEnrolledCourses(courseObj) {
         var courseNoField = document.getElementById('myCourseNo-' + rowIndex);
         courseNoField.value = course.courseNo;
         var courseNameField = document.getElementById('myCourseName-' + rowIndex);
-        courseNameField.textContent = course.title;
+        courseNameField.textContent = course.title.toUpperCase();
         var courseCreditField = document.getElementById('myCourseCredit-' + rowIndex);
         courseCreditField.value = course.credit;
     });
@@ -511,7 +512,7 @@ if (document.title.indexOf(pageTitle) != -1) {
 
     $('#AddNewCourse').click(addNewCourseRow);
 
-    $("#myCourseNo-1").on('change keydown paste input', function () {
+    $("#myCourseNo-1").keyup(function () {
         GetCourseInformationFromAPI($(this), '1');
     });
 
