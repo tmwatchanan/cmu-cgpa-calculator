@@ -319,7 +319,7 @@ function AdjustRowNumber() {
 function FindNextEnrolledCourseList(studentId, lastSemester, lastYear) {
     let nextSemester, nextYear;
     let courseListObj;
-    console.log(studentId, lastSemester, lastYear);
+    // console.log(studentId, lastSemester, lastYear);
     if (lastSemester == "1") {
         nextSemester = "2";
         nextYear = lastYear;
@@ -344,7 +344,7 @@ function GetEnrolledCourseListOfStudentIdFromAPI(studentId, semester, year) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var responseObj = JSON.parse(this.responseText);
-            console.log('responseObj', responseObj);
+            // console.log('responseObj', responseObj);
             if (responseObj.status == false && semester != "3") {
                 semester = "3";
                 responseObj = GetEnrolledCourseListOfStudentIdFromAPI(studentId, semester, year);
@@ -380,9 +380,8 @@ function GetCourseInformationFromAPI(element) {
 };
 
 function FillTableWithEnrolledCourses(courseObj) {
-    console.log("> FillTableWithEnrolledCourses");
     const courseList = courseObj.courseList;
-    console.log("courseList", courseList);
+    // console.log("courseList", courseList);
     $("#table-main").find("tr:not(:first)").remove(); // clear all TR expect header row
     courseList.forEach(course => {
         let rowIndex = addNewCourseRow();
@@ -426,10 +425,10 @@ if (document.title.indexOf(pageTitle) != -1) {
         yearList.push(year);
         semesterList.push(semester);
     }
-    console.log(yearList);
-    console.log(semesterList);
-    console.log(Array.from(new Set(yearList)));
-    console.log(yearList[yearList.length - 1]);
+    // console.log(yearList);
+    // console.log(semesterList);
+    // console.log(Array.from(new Set(yearList)));
+    // console.log(yearList[yearList.length - 1]);
     const lastYear = yearList[yearList.length - 1];
     const lastSemester = semesterList[semesterList.length - 1];
 
