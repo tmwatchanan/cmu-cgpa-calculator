@@ -83,8 +83,13 @@ new Noty({
             }).play();
         }
     },
-    text: 'Thanks for using "RegCMU CGPA Calculator"'
+    text: 'Thanks for using "CMU CGPA Calculator"'
 }).show();
+
+var studentId;
+var studentNextEnrolledCourseList;
+var studentNextSemester;
+var studentNextYear;
 
 var idxMyCourse = 2;
 var overallCredits = 0;
@@ -235,6 +240,7 @@ function addNewCourseRow() {
 
     idxMyCourse++;
     AdjustRowNumber();
+    return idxMyCourse-1;
 };
 
 function RemoveThisRow(button) {
@@ -310,6 +316,48 @@ function AdjustRowNumber() {
     }
 };
 
+function FindNextEnrolledCourseList(studentId, lastSemester, lastYear) {
+    let nextSemester, nextYear;
+    let courseListObj;
+    console.log(studentId, lastSemester, lastYear);
+    if (lastSemester == "1") {
+        nextSemester = "2";
+        nextYear = lastYear;
+        courseListObj = GetEnrolledCourseListOfStudentIdFromAPI(studentId, nextSemester, nextYear);
+    } else if (lastSemester == "2") {
+        nextSemester = "1";
+        nextYear = (Number.parseInt(lastYear) + 1).toString();
+        courseListObj = GetEnrolledCourseListOfStudentIdFromAPI(studentId, nextSemester, nextYear);
+    } else if (lastSemester == "3") {
+        nextSemester = "1";
+        nextYear = (Number.parseInt(lastYear) + 1).toString();
+        courseListObj = GetEnrolledCourseListOfStudentIdFromAPI(studentId, nextSemester, nextYear);
+    }
+    return courseListObj;
+}
+
+function GetEnrolledCourseListOfStudentIdFromAPI(studentId, semester, year) {
+    let query = { id: studentId, semester: semester, year: year };
+    let queryString = jQuery.param(query);
+    const url = urlAPI + '/cgpa-calculator?' + queryString;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var responseObj = JSON.parse(this.responseText);
+            console.log('responseObj', responseObj);
+            if (responseObj.status == false && semester != "3") {
+                semester = "3";
+                responseObj = GetEnrolledCourseListOfStudentIdFromAPI(studentId, semester, year);
+            } else if (responseObj.status == true) {
+                FillTableWithEnrolledCourses(responseObj);
+            }
+            return responseObj;
+        }
+    };
+    xhttp.open("GET", url, true);
+    xhttp.send();
+};
+
 function GetCourseInformationFromAPI(element) {
     const courseNo = element.val();
     const elementId = element.attr('id');
@@ -331,13 +379,26 @@ function GetCourseInformationFromAPI(element) {
     }
 };
 
-// ChePk ple
+function FillTableWithEnrolledCourses(courseObj) {
+    console.log("> FillTableWithEnrolledCourses");
+    const courseList = courseObj.courseList;
+    console.log("courseList", courseList);
+    $("#table-main").find("tr:not(:first)").remove(); // clear all TR expect header row
+    courseList.forEach(course => {
+        let rowIndex = addNewCourseRow();
+        var courseNoField = document.getElementById('myCourseNo-' + rowIndex);
+        courseNoField.value = course.courseNo;
+        var courseNameField = document.getElementById('myCourseName-' + rowIndex);
+        courseNameField.textContent = course.title;
+        var courseCreditField = document.getElementById('myCourseCredit-' + rowIndex);
+        courseCreditField.value = course.credit;
+    });
+};
+
+// Check page title
 const pageTitle = "ผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่";
 if (document.title.indexOf(pageTitle) != -1) {
     console.log("RegCMU CGPA CAlculator has been activated!");
-
-    // $("tbody").prepend("<tr><td>...contents...</td></tr>");
-    // $('.msan').html('Whatever <b>HTML</b> you want here.');
 
     var numTableFound = $('html body center > table').length;
     // console.log("numFound = " + numFound + "\n");
@@ -347,10 +408,14 @@ if (document.title.indexOf(pageTitle) != -1) {
     // }
 
     // Check year and semester
+    var yearList = [],
+        semesterList = [];
     for (let term_year = 1; term_year < numTableFound; term_year += 2) {
         var tableHeaderText = $('html body center > table').eq(term_year).find('tbody tr td.msan12').text();
         const year = tableHeaderText.substring(tableHeaderText.lastIndexOf(" ") + 1, tableHeaderText.length);
         const yearNum = Number.parseInt(year);
+        let semester = tableHeaderText.split(" ")[1];
+        semester = (semester == "ฤดูร้อน" ? "3" : semester);
         if (firstYear == -1) {
             firstYear = yearNum;
         }
@@ -358,7 +423,18 @@ if (document.title.indexOf(pageTitle) != -1) {
             tableHeaderText.search("ฤดูร้อน") != -1) {
             summerAtYearFour = true;
         }
+        yearList.push(year);
+        semesterList.push(semester);
     }
+    console.log(yearList);
+    console.log(semesterList);
+    console.log(Array.from(new Set(yearList)));
+    console.log(yearList[yearList.length - 1]);
+    const lastYear = yearList[yearList.length - 1];
+    const lastSemester = semesterList[semesterList.length - 1];
+
+    studentId = $('html body center table').first().find('tbody tr').eq(2).find('td').eq(1).text().trim();
+    FindNextEnrolledCourseList(studentId, lastSemester, lastYear);
 
     var lastTable;
     for (let term_year = 1; term_year < numTableFound; term_year += 2) {
@@ -431,7 +507,7 @@ if (document.title.indexOf(pageTitle) != -1) {
     $('#wait-top-bg').attr('background', waitTopBg2ImgSrc);
     const waitTopRight2ImgSrc = chrome.runtime.getURL("images/wait-top-right.gif");
     $('#wait-top-right').attr('src', waitTopRight2ImgSrc);
-    
+
     $('#alert-program').load(chrome.runtime.getURL('alert-program.html'));
 
     $('#AddNewCourse').click(addNewCourseRow);
