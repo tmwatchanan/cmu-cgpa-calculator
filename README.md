@@ -1,4 +1,4 @@
-## RegCMU Cumulative GPA Calculator
+## CMU Cumulative GPA Calculator
 >ซอฟต์แวร์นี้ทั้งตัวผู้พัฒนาและตัวซอฟต์แวร์เองไม่ได้เป็นส่วนหนึ่งของสำนักทะเบียนและประมวลผล มหาวิทยาลัยเชียงใหม่ แต่ถูกพัฒนาขึ้นเพื่อทำงานบนหน้าเพจผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่ เพื่อเพิ่มความสะดวกสบายให้กับผู้ใช้งานเป็นหลัก
 
 >```ซอฟต์แวร์ดังกล่าวไม่มีการเก็บบันทึกข้อมูลการใช้งาน, CMU IT Account, ข้อมูลส่วนตัว และข้อมูลเกรด ของผู้ใช้งานใด ๆ ทั้งสิ้น```
@@ -9,10 +9,10 @@
 
 ### การติดตั้ง
 + สำหรับ Chrome
-  - [RegCMU Cumulative GPA Calculator - Chrome Web Store](https://chrome.google.com/webstore/detail/cmu-cumulative-gpa-calcul/acneommdmgbcnangkfjdjcmnelkopgdi)
+  - [CMU Cumulative GPA Calculator - Chrome Web Store](https://chrome.google.com/webstore/detail/cmu-cumulative-gpa-calcul/acneommdmgbcnangkfjdjcmnelkopgdi)
 
 + สำหรับ FireFox (ได้ทั้ง PC และ Mobile)
-  - [RegCMU Cumulative GPA Calculator – Add-ons for Firefox](https://addons.mozilla.org/en-US/firefox/addon/cmu-cgpa-calculator/)
+  - [CMU Cumulative GPA Calculator – Add-ons for Firefox](https://addons.mozilla.org/en-US/firefox/addon/cmu-cgpa-calculator/)
 
 ### การใช้งาน
 1. เข้าไปยังหน้าเว็บไซต์ [ผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่](https://www3.reg.cmu.ac.th/transcript/) ของ สำนักทะเบียนและประมวลผล มหาวิทยาลัยเชียงใหม่
