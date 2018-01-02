@@ -9,7 +9,7 @@
 
 ### การติดตั้ง
 + สำหรับ Chrome
-  - [RegCMU Cumulative GPA Calculator - Chrome Web Store](https://chrome.google.com/webstore/detail/regcmu-cumulative-gpa-cal/acneommdmgbcnangkfjdjcmnelkopgdi)
+  - [RegCMU Cumulative GPA Calculator - Chrome Web Store](https://chrome.google.com/webstore/detail/cmu-cumulative-gpa-calcul/acneommdmgbcnangkfjdjcmnelkopgdi)
 
 + สำหรับ FireFox (ได้ทั้ง PC และ Mobile)
   - [RegCMU Cumulative GPA Calculator – Add-ons for Firefox](https://addons.mozilla.org/en-US/firefox/addon/cmu-cgpa-calculator/)
