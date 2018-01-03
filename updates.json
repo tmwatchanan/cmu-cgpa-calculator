@@ -13,8 +13,9 @@
                     "update_hash": "sha256:175c6d06430b2a7d39418f6273b8c20c28d25feda4a5196cb298f1af4c8b0c0f"
                 },
                 {
-                    "version": "1.18",
-                    "update_link": "http://myweb.cmu.ac.th/watchanan_chan/cmu-cgpa-calculator/cmu_cumulative_gpa_calculator-1.18-an+fx.xpi",
+                    "version": "1.19",
+                    "update_link": "http://myweb.cmu.ac.th/watchanan_chan/cmu-cgpa-calculator/cmu_cumulative_gpa_calculator-1.19-an+fx.xpi",
+                    "update_hash": "sha256:3206d5c87daf07dfbe7e4203eedef79b62a5ce05b415ee83f2ebb2112b8f60c2"
                 }
             ]
         }
