@@ -1,0 +1,18 @@
+{
+    "addons": {
+        "{d263384e-1c00-4dce-bedf-22f8f7dbd1c1}": {
+            "updates": [
+                {
+                    "version": "1.16",
+                    "update_link": "http://myweb.cmu.ac.th/watchanan_chan/cmu-cgpa-calculator/cmu_cumulative_gpa_calculator-1.16-an+fx.xpi",
+                    "update_hash": "sha256:5d6358c2efebdb27a1e1f051399993e99f942378f264e0abbfb37431d572be38"
+                },
+                {
+                    "version": "1.17",
+                    "update_link": "http://myweb.cmu.ac.th/watchanan_chan/cmu-cgpa-calculator/cmu_cumulative_gpa_calculator-1.17-an+fx.xpi",
+                    "update_hash": "sha256:175c6d06430b2a7d39418f6273b8c20c28d25feda4a5196cb298f1af4c8b0c0f"
+                }
+            ]
+        }
+    }
+}
