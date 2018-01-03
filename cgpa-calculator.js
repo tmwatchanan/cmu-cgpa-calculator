@@ -173,7 +173,7 @@ function createCourseCreditInput(idx) {
 }
 
 function createSelectLetterGradeDropDown(idx) {
-    var array = ["-", "A", "B+", "B", "C+", "C", "D+", "D", "F", "S", "P"];
+    var array = ["-", "A", "B+", "B", "C+", "C", "D+", "D", "F", "S", "U", "P"];
     var selectList = document.createElement("select");
     selectList.id = "myCourseLetterGrade-" + idxMyCourse;
     for (var i = 0; i < array.length; i++) {
@@ -264,6 +264,7 @@ function CalculateExpectedGrades() {
     nextCreditsGradeS = 0;
     nextCreditsGradeP = 0;
     nextCreditsGradeF = 0;
+    let nextCreditsEnrolledGradeSorU = 0, nextCreditsGotGradeSorU = 0;
     for (let index = 1; index <= idxMyCourse; index++) {
         var inputCredit = $("#myCourseCredit-" + index).val();
         if (inputCredit == '') {
@@ -280,9 +281,12 @@ function CalculateExpectedGrades() {
                 nextCreditsGradeF += credit;
             }
         } else if (letterGrade == 'S') {
-            nextCreditsGradeS += credit;
+            nextCreditsEnrolledGradeSorU += credit;
+            nextCreditsGotGradeSorU += credit;
         } else if (letterGrade == 'P') {
             nextCreditsGradeP += credit;
+        } else if (letterGrade == 'U') {
+            nextCreditsEnrolledGradeSorU += credit;
         }
 
         // Check Award
@@ -296,15 +300,15 @@ function CalculateExpectedGrades() {
     }
     nextGPA = nextGradePoints / nextCredits;
     nextGPA = roundNumber(nextGPA, 2);
-    $('#nextEnrolledCredits').text(nextCredits);
-    $('#nextGotCredits').text(nextCredits);
-    $('#nextGPA').text(isNaN(nextGPA) ? 0.00.toFixed(2) : nextGPA);
+    $('#nextEnrolledCredits').text(nextCredits + nextCreditsEnrolledGradeSorU);
+    $('#nextGotCredits').text(nextCredits + nextCreditsGotGradeSorU);
+    $('#nextGPA').text(isNaN(nextGPA) ? 0.00.toFixed(2) : nextGPA.toFixed(2));
     expectedCredits = overallCredits + nextCredits;
     expectedGradePoints = overallGradePoints + nextGradePoints;
     expectedCGPA = expectedGradePoints / expectedCredits;
-    expectedCGPA = roundNumber(expectedCGPA, 2);
-    $('#expectedEnrolledCredits').text(regCmuEnrolledCredits + nextCredits + nextCreditsGradeS + nextCreditsGradeP);
-    $('#expectedGotCredits').text(regCmuGotCredits + nextCredits + nextCreditsGradeS - nextCreditsGradeF);
+    expectedCGPA = roundNumber(expectedCGPA, 2).toFixed(2);
+    $('#expectedEnrolledCredits').text(regCmuEnrolledCredits + nextCredits + nextCreditsEnrolledGradeSorU + nextCreditsGradeP);
+    $('#expectedGotCredits').text(regCmuGotCredits + nextCredits + nextCreditsGotGradeSorU - nextCreditsGradeF);
     $('#expectedCGPA').text(expectedCGPA);
 };
 
@@ -494,7 +498,7 @@ if (document.title.indexOf(pageTitle) != -1) {
     // $.get(chrome.extension.getURL('table-template.html'), function(data){
     //     $('html body center > hr').last().after(data);
     // });
-    $('html body center > hr').last().after('<script> function AdjustRowNumber() { var table = document.getElementById("table-main"); for (var i = 1, row; row = table.rows[i]; i++) { const noIdx = row.cells[0]; noIdx.textContent = i; } }; function RemoveThisRow(button) { var row = button.parentNode.parentNode; var name = row.getElementsByTagName("td")[0].innerHTML; var table = document.getElementById("table-main"); table.deleteRow(row.rowIndex); AdjustRowNumber(); }; </script> <br> <h1>CMU CGPA Calculator</h1> <div id="alert-program"></div> <table id="cgpa-calculator-table" border="0" align="center" cellpadding="0" cellspacing="0" width="597" bgcolor="#0068D0"> <tbody> <tr id="table-caption"> <td bgcolor="#FFFFFF" width="597" align="center" class="msan"> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img id="wait-top-left" src="" width="14" height="29"> </td> <td id="wait-top-bg" width="723" height="20" align="center" background="" bgcolor="#FFFFFF" class="msan12"><b>Expected</b> Grades in the <b>Next</b> Semester <!-- <b>1</b> ปีการศึกษา <b>2560</b> --> </td> <td width="14" height="20" align="right" valign="top"> <img id="wait-top-right" src="" width="14" height="29"> </td> </tr> </tbody> </table> </td> </tr> <tr> <td width="597" bgcolor="#FFFFFF"> <table id="table-main" border="0" cellspacing="1" cellpadding="2" width="100%" bgcolor="#A2BCD9"> <tbody> <tr bgcolor="#C6E2FF" class="msan" id="table-header"> <td width="29" height="26" align="center" bgcolor="#FFC6C7" class="taho7"> <b>NO</b> </td> <td width="84" align="center" bgcolor="#FFC6C7" class="taho7"> <b>COURSE NO</b> </td> <td width="314" align="center" bgcolor="#FFC6C7" class="taho7"> <b>TITLE</b> </td> <td width="66" align="center" bgcolor="#FFC6C7" class="taho7"> <b>CREDIT</b> </td> <td width="78" align="center" bgcolor="#FFC6C7" class="taho7"> <b>GRADE</b> </td> <td width="29" height="26" align="center" bgcolor="#FFC6C7" class="taho7"> </td> </tr> <tr id="myCourseTR-1" bgcolor="#FFE3E4" class="msan"> <td width="29" height="22" align="center">1</td> <td width="84" height="22" align="center"><input id="myCourseNo-1" type="text" name="CourseId" value="" style="text-align: center" maxlength="6" size="6"></td> <td id="myCourseName-1" width="314" height="22" align="left">COURSE NAME</td> <td height="22" align="center"><input id="myCourseCredit-1" type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td> <td width="78" height="22" align="center" class="msan"> <select id="myCourseLetterGrade-1" name="CourseLetterGrade"> <option value="-">-</option> <option value="A">A</option> <option value="B+">B+</option> <option value="B">B</option> <option value="C+">C+</option> <option value="C">C</option> <option value="D+">D+</option> <option value="D">D</option> <option value="F">F</option> <option value="S">S</option> <option value="P">P</option> </select> </td> <td width="29" height="22" align="center"> <input id="myRemoveButton-1" type="button" value="X" onclick="RemoveThisRow(this);"> </td> </tr> </tbody> </table> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img id="wait-bottom-left2" src="" width="14" height="21"> </td> <td id="wait-bottom-bg2" width="723" height="20" align="center" background="" bgcolor="#FFFFFF"></td> <td width="14" height="20" align="right" valign="top"> <img id="wait-bottom-right2" src="" width="14" height="21"> </td> </tr> </tbody> </table> </td> </tr> </tbody> </table> <br> <INPUT id="AddNewCourse" type="button" value="Add" class="btn_medium" /> <br> <hr width="520" size="1"> ');
+    $('html body center > hr').last().after('<script> function AdjustRowNumber() { var table = document.getElementById("table-main"); for (var i = 1, row; row = table.rows[i]; i++) { const noIdx = row.cells[0]; noIdx.textContent = i; } }; function RemoveThisRow(button) { var row = button.parentNode.parentNode; var name = row.getElementsByTagName("td")[0].innerHTML; var table = document.getElementById("table-main"); table.deleteRow(row.rowIndex); AdjustRowNumber(); }; </script> <br> <h1>CMU CGPA Calculator</h1> <div id="alert-program"></div> <table id="cgpa-calculator-table" border="0" align="center" cellpadding="0" cellspacing="0" width="597" bgcolor="#0068D0"> <tbody> <tr id="table-caption"> <td bgcolor="#FFFFFF" width="597" align="center" class="msan"> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img id="wait-top-left" src="" width="14" height="29"> </td> <td id="wait-top-bg" width="723" height="20" align="center" background="" bgcolor="#FFFFFF" class="msan12"><b>Expected</b> Grades in the <b>Next</b> Semester <!-- <b>1</b> ปีการศึกษา <b>2560</b> --> </td> <td width="14" height="20" align="right" valign="top"> <img id="wait-top-right" src="" width="14" height="29"> </td> </tr> </tbody> </table> </td> </tr> <tr> <td width="597" bgcolor="#FFFFFF"> <table id="table-main" border="0" cellspacing="1" cellpadding="2" width="100%" bgcolor="#A2BCD9"> <tbody> <tr bgcolor="#C6E2FF" class="msan" id="table-header"> <td width="29" height="26" align="center" bgcolor="#FFC6C7" class="taho7"> <b>NO</b> </td> <td width="84" align="center" bgcolor="#FFC6C7" class="taho7"> <b>COURSE NO</b> </td> <td width="314" align="center" bgcolor="#FFC6C7" class="taho7"> <b>TITLE</b> </td> <td width="66" align="center" bgcolor="#FFC6C7" class="taho7"> <b>CREDIT</b> </td> <td width="78" align="center" bgcolor="#FFC6C7" class="taho7"> <b>GRADE</b> </td> <td width="29" height="26" align="center" bgcolor="#FFC6C7" class="taho7"> </td> </tr> <tr id="myCourseTR-1" bgcolor="#FFE3E4" class="msan"> <td width="29" height="22" align="center">1</td> <td width="84" height="22" align="center"><input id="myCourseNo-1" type="text" name="CourseId" value="" style="text-align: center" maxlength="6" size="6"></td> <td id="myCourseName-1" width="314" height="22" align="left">COURSE NAME</td> <td height="22" align="center"><input id="myCourseCredit-1" type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td> <td width="78" height="22" align="center" class="msan"> <select id="myCourseLetterGrade-1" name="CourseLetterGrade"> <option value="-">-</option> <option value="A">A</option> <option value="B+">B+</option> <option value="B">B</option> <option value="C+">C+</option> <option value="C">C</option> <option value="D+">D+</option> <option value="D">D</option> <option value="F">F</option> <option value="S">S</option> <option value="U">U</option> <option value="P">P</option> </select> </td> <td width="29" height="22" align="center"> <input id="myRemoveButton-1" type="button" value="X" onclick="RemoveThisRow(this);"> </td> </tr> </tbody> </table> <table cellspacing="0" cellpadding="0" width="100%" align="center" border="0"> <tbody> <tr> <td width="14" height="20" align="left" valign="top" bgcolor="#FFFFFF"> <img id="wait-bottom-left2" src="" width="14" height="21"> </td> <td id="wait-bottom-bg2" width="723" height="20" align="center" background="" bgcolor="#FFFFFF"></td> <td width="14" height="20" align="right" valign="top"> <img id="wait-bottom-right2" src="" width="14" height="21"> </td> </tr> </tbody> </table> </td> </tr> </tbody> </table> <br> <INPUT id="AddNewCourse" type="button" value="Add" class="btn_medium" /> <br> <hr width="520" size="1"> ');
     const waitBottomLeft2ImgSrc = chrome.runtime.getURL("images/wait-bottom-left2.gif");
     $('#wait-bottom-left2').attr('src', waitBottomLeft2ImgSrc);
     const waitBottomBg2ImgSrc = chrome.runtime.getURL("images/wait-bottom-bg2.gif");

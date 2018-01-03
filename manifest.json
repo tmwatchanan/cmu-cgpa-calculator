@@ -1,7 +1,7 @@
 {
     "name": "CMU Cumulative GPA Calculator",
     "description": "Chrome Extension/FireFox add-on for calculating your expected GPA and CGPA in the transcript page for Chiang Mai University students",
-    "version": "1.15",
+    "version": "1.16",
     "manifest_version": 2,
     "content_scripts": [
         {
@@ -9,13 +9,13 @@
                 "https://www3.reg.cmu.ac.th/transcript/result.php?time=*"
             ],
             "js": [
-                "thirdParty/jquery-3.2.1.min.js",
-                "thirdParty/noty-3.1.4.min.js",
-                "thirdParty/mo.min.js",
+                "thirdParty/jquery-3.2.1.js",
+                "thirdParty/noty-3.1.4.js",
+                "thirdParty/mo.js",
                 "cgpa-calculator.js"
             ],
             "css": [
-                "thirdParty/noty-3.1.4.min.css"
+                "thirdParty/noty-3.1.4.css"
             ]
         }
     ],
@@ -31,7 +31,7 @@
     ],
     "background": {
         "scripts": [
-            "thirdParty/jquery-3.2.1.min.js"
+            "thirdParty/jquery-3.2.1.js"
         ]
     },
     "icons": {
