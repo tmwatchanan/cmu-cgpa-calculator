@@ -226,7 +226,7 @@ function addNewCourseRow() {
     };
     td6.appendChild(btnRemove);
 
-    $("#myCourseNo-" + idxMyCourse).keyup(function () {
+    $("#myCourseNo-" + idxMyCourse).focusout(function () {
         GetCourseInformationFromAPI($(this), $(this).attr("id"));
     });
     $("#myCourseCredit-" + idxMyCourse).on('change keydown paste input', function () {
@@ -512,7 +512,7 @@ if (document.title.indexOf(pageTitle) != -1) {
 
     $('#AddNewCourse').click(addNewCourseRow);
 
-    $("#myCourseNo-1").keyup(function () {
+    $("#myCourseNo-1").focusout(function () {
         GetCourseInformationFromAPI($(this), '1');
     });
 
