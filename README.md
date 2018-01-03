@@ -11,8 +11,8 @@
 + สำหรับ Chrome
   - [CMU Cumulative GPA Calculator - Chrome Web Store](https://chrome.google.com/webstore/detail/cmu-cumulative-gpa-calcul/acneommdmgbcnangkfjdjcmnelkopgdi)
 
-+ สำหรับ FireFox (ได้ทั้ง PC และ Mobile)
-  - [CMU Cumulative GPA Calculator – Add-ons for Firefox](https://addons.mozilla.org/en-US/firefox/addon/cmu-cgpa-calculator/)
++ สำหรับ Firefox (ได้ทั้ง PC และ Android)
+  - [CMU Cumulative GPA Calculator – Add-ons for Firefox (self-distributed (unlisted) versions)](http://myweb.cmu.ac.th/watchanan_chan/cmu-cgpa-calculator/cmu_cumulative_gpa_calculator-latest-an+fx.xpi)
 
 ### การใช้งาน
 1. เข้าไปยังหน้าเว็บไซต์ [ผลการเรียนนักศึกษา มหาวิทยาลัยเชียงใหม่](https://www3.reg.cmu.ac.th/transcript/) ของ สำนักทะเบียนและประมวลผล มหาวิทยาลัยเชียงใหม่
