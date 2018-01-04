@@ -173,7 +173,7 @@ function createCourseCreditInput(idx) {
 }
 
 function createSelectLetterGradeDropDown(idx) {
-    var array = ["-", "A", "B+", "B", "C+", "C", "D+", "D", "F", "S", "U", "P"];
+    var array = ["A", "B+", "B", "C+", "C", "D+", "D", "F", "S", "U", "P"];
     var selectList = document.createElement("select");
     selectList.id = "myCourseLetterGrade-" + idxMyCourse;
     for (var i = 0; i < array.length; i++) {
@@ -240,6 +240,7 @@ function addNewCourseRow() {
 
     idxMyCourse++;
     AdjustRowNumber();
+    CalculateExpectedGrades();
     return idxMyCourse-1;
 };
 
