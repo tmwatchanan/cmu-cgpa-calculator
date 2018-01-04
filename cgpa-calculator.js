@@ -177,9 +177,13 @@ function createSelectLetterGradeDropDown(idx) {
     var selectList = document.createElement("select");
     selectList.id = "myCourseLetterGrade-" + idxMyCourse;
     for (var i = 0; i < array.length; i++) {
+        var grade = array[i];
         var option = document.createElement("option");
-        option.value = array[i];
-        option.text = array[i];
+        if (grade === "A") {
+            option.selected = true;
+        }
+        option.value = grade;
+        option.text = grade;
         selectList.appendChild(option);
     }
     return selectList;
@@ -240,6 +244,7 @@ function addNewCourseRow() {
 
     idxMyCourse++;
     AdjustRowNumber();
+    CalculateExpectedGrades();
     return idxMyCourse-1;
 };
 
