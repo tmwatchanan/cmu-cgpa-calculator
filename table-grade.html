@@ -1,25 +1,28 @@
+<link href="thirdParty/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="thirdParty/bootstrap.min.js"></script>
 <br>
 <br>
-<table width="431" height="38" border="0" cellpadding="4" cellspacing="1" bgcolor="#A2BCD9">
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr style="background-color:#DADADA;">
+            <th align="center">ผลการศึกษา/Record</th>
+            <th align="center">หน่วยกิตที่ลง / CA</th>
+            <th align="center">หน่วยกิตที่ได้ / CE</th>
+            <th align="center">เกรดเฉลี่ย / GPA</th>
+        </tr>
+    </thead>
     <tbody>
         <tr>
-            <td width="82" height="10" valign="middle" align="center" bgcolor="#FFC6C7">ผลการศึกษา</td>
-            <td width="75" height="10" valign="middle" align="center" bgcolor="#FFC6C7">หน่วยกิตที่ลง</td>
-            <td width="75" height="10" valign="middle" align="center" bgcolor="#FFC6C7">หน่วยกิตที่ได้</td>
-            <td width="78" height="10" valign="middle" align="center" bgcolor="#FFC6C7">เกรดเฉลี่ย</td>
+            <td>ภาคการศึกษา<b>หน้า</b></td>
+            <td id="nextEnrolledCredits" align="center">&nbsp;0.00&nbsp;</td id="nextEnrolledCredits">
+            <td id="nextGotCredits" align="center">&nbsp;0.00&nbsp;</td id="nextGotCredits">
+            <td id="nextGPA" style="font-weight:bold;" align="center">&nbsp;0.00&nbsp;</td id="nextGPA">
         </tr>
-        <tr>
-            <td height="13" valign="middle" align="right" bgcolor="#FFC6C7">ภาคการศึกษา<b>หน้า</b></td>
-            <td id="nextEnrolledCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td>
-            <td id="nextGotCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td>
-            <td id="nextGPA" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0.00&nbsp;</td>
-        </tr>
-        <tr>
-            <td height="13" valign="middle" align="right" bgcolor="#FFC6C7"><b>คาดหมาย</b>สะสมทั้งหมด</td>
-            <td id="expectedEnrolledCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td>
-            <td id="expectedGotCredits" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0&nbsp;</td>
-            <td id="expectedCGPA" height="13" valign="middle" align="center" bgcolor="#FFE3E4">&nbsp;0.00&nbsp;</td>
+        <tr style="font-weight:bold;">
+            <td>คาดหมายสะสมทั้งหมด / Cumulative</td>
+            <td id="expectedEnrolledCredits" align="center">&nbsp;0.00&nbsp;</td id="expectedEnrolledCredits">
+            <td id="expectedGotCredits" align="center">&nbsp;0.00&nbsp;</td id="expectedGotCredits">
+            <td id="expectedCGPA" align="center">&nbsp;0.00&nbsp;</td id="expectedCGPA">
         </tr>
     </tbody>
 </table>
-<br>
