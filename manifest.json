@@ -1,37 +1,28 @@
 {
     "name": "CMU Cumulative GPA Calculator",
     "description": "Chrome Extension/FireFox add-on for calculating your expected GPA and CGPA in the transcript page for Chiang Mai University students",
-    "version": "1.19",
+    "version": "1.2",
     "manifest_version": 2,
-    "content_scripts": [
-        {
-            "matches": [
-                "https://www3.reg.cmu.ac.th/transcript/result.php?time=*"
-            ],
-            "js": [
-                "thirdParty/jquery-3.2.1.min.js",
-                "thirdParty/noty-3.1.4.min.js",
-                "thirdParty/mo.min.js",
-                "cgpa-calculator.js"
-            ],
-            "css": [
-                "thirdParty/noty-3.1.4.min.css"
-            ]
-        }
-    ],
-    "web_accessible_resources": [
-        "table-template.html",
-        "images/wait-bottom-bg2.gif",
-        "images/wait-bottom-left2.gif",
-        "images/wait-bottom-right2.gif",
-        "images/wait-top-bg.gif",
-        "images/wait-top-left.gif",
-        "images/wait-top-right.gif",
-        "alert-program.html"
-    ],
+    "content_scripts": [{
+        "matches": [
+            "https://www1.reg.cmu.ac.th/registrationoffice/student/main.php?mainfile=studentgrad"
+
+        ],
+        "js": [
+            "thirdParty/jquery-3.4.1.min.js",
+            "thirdParty/noty-3.1.4.min.js",
+            "thirdParty/mo.min.js",
+            "cgpa-calculator.js",
+            "thirdParty/bootstrap.min.js"
+        ],
+        "css": [
+            "thirdParty/noty-3.1.4.min.css",
+            "thirdParty/bootstrap.min.css"
+        ]
+    }],
     "background": {
         "scripts": [
-            "thirdParty/jquery-3.2.1.min.js"
+            "thirdParty/jquery-3.4.1.min.js"
         ]
     },
     "icons": {
@@ -41,10 +32,5 @@
     },
     "permissions": [
         "https://reg-cmu-api.herokuapp.com/*"
-    ],
-    "applications": {
-        "gecko": {
-            "update_url": "https://raw.githubusercontent.com/tmwatchanan/cmu-cgpa-calculator/master/updates.json"
-        }
-    }
+    ]
 }
