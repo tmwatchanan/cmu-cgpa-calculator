@@ -1,27 +1,8 @@
 <link href="thirdParty/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="thirdParty/bootstrap.min.js"></script>
-<script>
-    function AdjustRowNumber() {
-        var table = document.getElementById("table-main");
-        for (var i = 1, row; row = table.rows[i]; i++) {
-            const noIdx = row.cells[0];
-            noIdx.textContent = i;
-        }
-    };
-
-    function RemoveThisRow(button) {
-        var row = button.parentNode.parentNode;
-        var name = row.getElementsByTagName("td")[0].innerHTML;
-        var table = document.getElementById("table-main");
-        table.deleteRow(row.rowIndex);
-        AdjustRowNumber();
-    };
-</script>
-
-<br>
+<hr>
 <h3>CMU CGPA Calculator</h3>
 <div id="alert-program"></div>
-
 <table id="cgpa-calculator-table" class="table table-bordered table-striped" id="mt2" style="background-color:#eee;">
     <thead>
         <tr>
@@ -39,39 +20,17 @@
             <th width="7%">Grade</th>
         </tr>
     </thead>
-
     <tbody id="table-main">
         <tr id="myCourseTR-1">
             <td align="center">1</td>
-            <td align="center">
-                <input id="myCourseNo-1" type="text" name="CourseNo" value="" style="text-align: center" maxlength="6" size="6">
-            </td>
+            <td align="center"><input id="myCourseNo-1" type="text" name="CourseNo" value="" style="text-align: center" maxlength="6" size="6"></td>
             <td id="myCourseName-1">COURSE NAME</td>
-            <td align="center">
-                <input id="myCourseCredit-1" type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1">
-            </td>
-            <td align="center">
-                <select id="myCourseLetterGrade-1" name="CourseLetterGrade">
-                    <option value="-">-</option>
-                    <option value="A">A</option>
-                    <option value="B+">B+</option>
-                    <option value="B">B</option>
-                    <option value="C+">C+</option>
-                    <option value="C">C</option>
-                    <option value="D+">D+</option>
-                    <option value="D">D</option>
-                    <option value="F">F</option>
-                    <option value="S">S</option>
-                    <option value="P">P</option>
-                </select>
-            </td>
-            <td align="center">
-                <input id="myRemoveButton-1" type="button" value="X" class="btn btn-danger" onclick="RemoveThisRow(this);">
-            </td>
+            <td align="center"><input id="myCourseCredit-1" type="text" name="CourseCredit" value="0" style="text-align: center" maxlength="1" size="1"></td>
+            <td align="center"><select id="myCourseLetterGrade-1" name="CourseLetterGrade"><option value="-">-</option><option value="A">A</option><option value="B+">B+</option><option value="B">B</option><option value="C+">C+</option><option value="C">C</option><option value="D+">D+</option><option value="D">D</option><option value="F">F</option><option value="S">S</option><option value="P">P</option></select></td>
+            <td align="center"><input id="myRemoveButton-1" type="button" value="X" class="btn btn-danger" disabled></td>
         </tr>
     </tbody>
 </table>
-
 <center>
-    <INPUT id="AddNewCourse" type="button" value="Add" class="btn btn-primary" />
+    <INPUT id="AddNewCourse " type="button " value="Add " class="btn btn-primary " />
 </center>
